@@ -58,6 +58,10 @@
     "@types/react-slick": "^0.23.5",
     "autoprefixer": "9",
     "postcss": "7",
+    "postcss-custom-properties": "^11.0.0",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat"
+  },
+  "resolutions": {
+    "react-scripts/postcss-preset-env/postcss-custom-properties": "^11.0.0"
   }
 }
