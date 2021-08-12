@@ -1,15 +1,18 @@
 import { GENRES, SEASONS, TYPES } from "./constants";
-import HomePage from "./pages/HomePage";
-import BrowseScreen from "./pages/BrowseScreen";
+import lazyLoading from "./utils/lazyLoading";
+
 import { Genre, Route, Season, Type } from "./types";
-import InfoScreen from "./pages/InfoScreen";
-import WatchScreen from "./pages/WatchScreen";
+
+const HomeScreen = lazyLoading(() => import("./pages/HomePage"));
+const BrowseScreen = lazyLoading(() => import("./pages/BrowseScreen"));
+const InfoScreen = lazyLoading(() => import("./pages/InfoScreen"));
+const WatchScreen = lazyLoading(() => import("./pages/WatchScreen"));
 
 const routes: Route[] = [
   {
     name: "Trang chủ",
     path: "/",
-    component: HomePage,
+    component: HomeScreen,
     header: true,
     dropdown: false,
   },

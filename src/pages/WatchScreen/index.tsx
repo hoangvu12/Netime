@@ -6,6 +6,7 @@ import { HiArrowNarrowLeft } from "react-icons/hi";
 import { useNavigate, useParams } from "react-router";
 import Button from "../../components/Button";
 import Loader from "../../components/Loader";
+import useDevice from "../../hooks/useDevice";
 import useQueryParams from "../../hooks/useQueryParams";
 import EpisodesButton from "./EpisodesButton";
 import useFetchSource from "./useFetchSource";
@@ -16,8 +17,9 @@ import "./Video.css";
 const WatchScreen = () => {
   const { slug } = useParams();
   const query = useQueryParams();
-
   const navigate = useNavigate();
+  const { isDesktop } = useDevice();
+
   const [showNextEpButton, setShowNextEpButton] = useState(false);
   const [showPauseScreen, setShowPauseScreen] = useState(false);
   const [episodeIndex, setEpisodeIndex] = useState(
@@ -58,6 +60,7 @@ const WatchScreen = () => {
           <EpisodesButton
             episodes={info?.episodes.map((episode) => episode.name)!}
             onClick={handleEpisodeClick}
+            activeIndex={episodeIndex}
           />
         ),
         position: 6,
@@ -76,36 +79,42 @@ const WatchScreen = () => {
       }
     });
 
-    player.on("pause", () => {
-      const timeoutSeconds = 2;
+    if (isDesktop) {
+      document.addEventListener("visibilitychange", () => {
+        if (document.visibilityState === "visible") {
+          return;
+        }
 
-      if (debounce.current) {
-        clearTimeout(debounce.current);
-      }
+        const timeoutSeconds = 6;
 
-      debounce.current = setTimeout(
-        () => setShowPauseScreen(true),
-        timeoutSeconds * 1000
-      );
-    });
+        if (debounce.current) {
+          clearTimeout(debounce.current);
+        }
 
-    player.on("play", () => {
-      if (debounce.current) {
-        clearTimeout(debounce.current);
-      }
-    });
+        debounce.current = setTimeout(
+          () => setShowPauseScreen(true),
+          timeoutSeconds * 1000
+        );
+      });
+
+      player.on("play", () => {
+        if (debounce.current) {
+          clearTimeout(debounce.current);
+        }
+      });
+    }
   };
 
   if (isInfoLoading || isSourceLoading) {
     return (
-      <div className="absolute flex items-center justify-center bg-background inset-0 w-screen h-screen z-20">
+      <div className="absolute flex items-center justify-center bg-background inset-0 w-screen h-screen z-50">
         <Loader />
       </div>
     );
   }
 
   return (
-    <div className="absolute bg-background inset-0 w-screen h-screen z-20">
+    <div className="absolute bg-background inset-0 w-screen h-screen z-50">
       <div className="relative w-full h-full">
         <Video source={videoSource} onReady={handleReady} />
 
@@ -133,7 +142,11 @@ const WatchScreen = () => {
             "absolute inset-0 bg-black bg-opacity-90 px-40 flex flex-col space-y-6 justify-center",
             !showPauseScreen ? "hidden" : "block"
           )}
-          onMouseEnter={() => setShowPauseScreen(false)}
+          onMouseEnter={() => {
+            if (isDesktop && showPauseScreen) {
+              setShowPauseScreen(false);
+            }
+          }}
         >
           <div className="space-y-2">
             <h1 className="text-gray-400 font-medium text-lg">Bạn đang xem</h1>

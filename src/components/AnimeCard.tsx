@@ -22,7 +22,7 @@ const AnimeCard = (props: AnimeCardProps) => {
           src={props.image}
           alt={props.title}
           className={classNames(
-            "w-full h-80 object-cover rounded-md rounded-b-none"
+            "w-full h-48 md:h-60 lg:h-80 object-cover rounded-md rounded-b-none"
           )}
         />
 

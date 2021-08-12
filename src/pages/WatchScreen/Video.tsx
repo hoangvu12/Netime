@@ -112,6 +112,8 @@ const Plyr: React.FC<PlyrProps> = (props) => {
       innerRef.current.plyr.source = source;
     }
 
+    window.screen.orientation.lock("landscape");
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [videoOptions]);
 

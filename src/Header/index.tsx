@@ -4,6 +4,7 @@ import React, { Fragment } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { BsChevronDown } from "react-icons/bs";
 import { RouteMatch } from "react-router";
+import { Link } from "react-router-dom";
 import Tooltip from "../components/Tooltip";
 import routes from "../routes";
 import NavButton from "./NavButton";
@@ -20,13 +21,15 @@ const Header = ({ matchedRoute }: HeaderProps) => {
     <Disclosure
       as="div"
       className={classNames(
-        "fixed z-10 px-4 flex justify-center items-center w-screen h-16 bg-background-lighter"
+        "fixed z-30 px-4 flex justify-center items-center w-screen h-16 bg-background-lighter"
       )}
     >
       {({ open }) => (
         <>
           <div className="absolute left-0 p-in">
-            <img src="/logo.png" alt="logo" />
+            <Link to="/">
+              <img src="/logo.png" alt="logo" />
+            </Link>
           </div>
 
           <div className="md:hidden absolute right-0 p-in flex justify-center items-center">
@@ -73,7 +76,7 @@ const Header = ({ matchedRoute }: HeaderProps) => {
             )}
           </div>
 
-          <Disclosure.Panel static className="relative lg:hidden">
+          <Disclosure.Panel static className="lg:hidden">
             <Transition
               show={open}
               as={Fragment}
@@ -84,7 +87,7 @@ const Header = ({ matchedRoute }: HeaderProps) => {
               leaveFrom="translate-x-0"
               leaveTo="-translate-x-full"
             >
-              <div className="w-60 h-screen p-4 space-y-2 absolute bg-background-darker top-8 right-3">
+              <div className="overflow-y-scroll w-40 h-screen px-4 py-4 pb-20 space-y-2 absolute bg-background-darker top-16 left-0">
                 {headerRoutes.map((route) =>
                   !route.dropdown ? (
                     <NavButton

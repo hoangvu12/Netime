@@ -24,7 +24,7 @@ const Pair = ({
   <div className="flex items-center text-base">
     <p className="text-gray-500 font-bold mr-2">{pairKey}: </p>
     {Array.isArray(pairValue) ? (
-      <div className={"text-white flex items-center space-x-1"}>
+      <div className={"text-white flex flex-wrap items-center space-x-1"}>
         {pairValue.map((value, index, arr) => onValue?.(value, index, arr))}
       </div>
     ) : (
@@ -54,31 +54,30 @@ const InfoScreen = () => {
           className="object-cover w-full rounded-md"
         />
         <div className="flex absolute inset-0 bg-black bg-opacity-80">
-          <div className="flex w-full px-8 py-14 self-end space-y-2">
+          <div className="flex w-full px-8 md:py-6 lg:py-14 self-end">
             <img
               src={info?.image}
               alt={info?.title}
-              className="object-cover w-40 h-72 mr-4 rounded-md"
+              className="object-cover w-30 h-40 md:w-40 md:h-60 lg:h-72 mr-4 rounded-md"
             />
             <div className="w-full self-end space-y-2">
               <div>
-                <h1 className="text-white text-3xl font-medium">
+                <h1 className="text-white text-sm md:text-lg lg:text-3xl line-clamp-2 md:line-clamp-none font-medium">
                   {info?.title}
                 </h1>
-                <h1 className="text-white text-xl font-medium">
+                <h1 className="text-white text-xs md:text-sm lg:text-xl line-clamp-1 font-medium">
                   {info?.altTitle}
                 </h1>
               </div>
 
-              <p className="text-gray-400 text-lg line-clamp-5 mb-2">
+              <p className="text-gray-400 text-xs md:text-sm lg:text-lg line-clamp-1 md:line-clamp-3 lg:line-clamp-5 mb-2">
                 {info?.description}
               </p>
 
               <Button
                 className="bg-primary text-white mt-2"
-                iconClassName="text-white"
+                iconClassName="hidden lg:block text-white"
                 startIcon={BsPlayFill}
-                iconSize={26}
                 to={`/watch/${slug}`}
               >
                 Xem ngay

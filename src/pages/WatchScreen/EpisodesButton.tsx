@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ImStack } from "react-icons/im";
+import classNames from "classnames";
 
 interface EpisodesButtonProps {
   episodes: string[];
@@ -8,9 +9,12 @@ interface EpisodesButtonProps {
     episode: EpisodesButtonProps["episodes"][number],
     index: number
   ) => void;
+  activeIndex?: number;
 }
 
 const EpisodesButton = (props: EpisodesButtonProps) => {
+  console.log(props.activeIndex);
+
   return (
     <Menu>
       <Menu.Button>
@@ -27,12 +31,17 @@ const EpisodesButton = (props: EpisodesButtonProps) => {
       >
         <Menu.Items className="rounded-md text-white overflow-y-scroll absolute space-y-2 right-0 bottom-full p-6 h-60 w-56 mt-2 origin-top-right bg-background shadow-lg focus:outline-none">
           <h1 className="text-white font-medium">Tập phim</h1>
-          <div className="w-full flex justify-center items-center flex-wrap">
+          <div className="w-full space-y-2">
             {props.episodes.map((episode, index) => (
               <Menu.Item
                 key={index}
                 as="button"
-                className="p-3 bg-background-lighter m-1 hover:bg-opacity-80"
+                className={classNames(
+                  "p-3 block min-w-full rounded-md m-1 w-full hover:bg-opacity-80",
+                  index === props.activeIndex
+                    ? "bg-primary text-white"
+                    : "bg-background-lighter"
+                )}
                 onClick={() => {
                   props?.onClick?.(episode, index);
                 }}
