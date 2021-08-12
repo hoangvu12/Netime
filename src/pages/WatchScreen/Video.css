@@ -1,0 +1,10 @@
+.plyr {
+  --plyr-color-main: #ff0000;
+  --plyr-range-thumb-background: #ff0000;
+  --plyr-menu-background: #181818;
+  --plyr-menu-color: white;
+  --plyr-menu-border-color: #262626;
+
+  width: 100%;
+  height: 100%;
+}

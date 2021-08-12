@@ -1,13 +1,87 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+@tailwind base;
+@tailwind components;
+
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  @apply bg-background;
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.tooltip-panel {
+  @apply invisible;
 }
+
+.vjs-control-bar {
+  @apply bg-gradient-to-b from-transparent to-black bg-opacity-60;
+}
+
+.vjs-control-bar-center-text {
+  @apply text-white font-medium text-2xl;
+}
+
+.video-js .vjs-play-progress:before {
+  @apply text-primary;
+}
+
+.video-js .vjs-play-progress {
+  @apply bg-primary;
+}
+
+.tooltip::after {
+  content: "";
+  height: 20px;
+  left: 0;
+  position: absolute;
+  width: 150%;
+  top: 100%;
+}
+
+.slick-track {
+  height: min-content !important;
+}
+
+.slide-anime-image {
+  height: 34rem;
+}
+
+.slick-dots li button:before {
+  @apply text-gray-400;
+}
+
+.slick-dots li.slick-active button:before {
+  @apply text-white;
+}
+
+.tooltip:hover .tooltip-panel,
+.tooltip-panel:hover {
+  @apply visible z-10;
+}
+
+::-webkit-scrollbar {
+  @apply w-1;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  @apply bg-background-darker;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-400 rounded-md;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-opacity-80;
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-indent: 1px;
+  text-overflow: "";
+}
+
+@tailwind utilities;

@@ -1,0 +1,65 @@
+.plyr__controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.plyr__progress {
+  flex-grow: 1;
+}
+
+.plyr__progress input {
+  cursor: pointer;
+}
+
+.plyr__progress:hover {
+  --plyr-range-track-height: 8px;
+}
+
+.plyr__controls-position {
+  display: flex;
+  align-items: center;
+}
+
+.plyr__controls-position--top {
+  position: absolute;
+  top: 0.5em;
+  width: 100%;
+}
+
+.plyr__time-container {
+  position: absolute;
+  top: -1.5em;
+  right: 1em;
+  display: flex;
+  align-items: center;
+}
+
+.plyr__time-container > * {
+  font-size: 1em;
+}
+
+.plyr__time.plyr__time--current {
+  margin-right: 0.5em;
+}
+
+.plyr__controls-position--top_relative {
+  position: relative;
+  width: 100%;
+}
+
+.plyr__controls-position--right {
+  justify-content: space-between;
+}
+
+.plyr__controls-position--center {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+.plyr__controls--audio {
+  display: flex;
+  align-items: center;
+}

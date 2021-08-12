@@ -1,24 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { matchRoutes, Route, Routes, useLocation } from "react-router";
+import Header from "./Header";
+import routes from "./routes";
+
+const routeObj = routes.map(({ component: Component, path }) => ({
+  caseSensitive: false,
+  element: <Component />,
+  path,
+}));
 
 function App() {
+  const location = useLocation();
+
+  const matchedRoute = matchRoutes(routeObj, location)?.[0];
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header matchedRoute={matchedRoute} />
+
+      <div className="px-8 py-20 lg:px-20 lg:py-24">
+        <Routes>
+          {routes.map(({ path, component: Component }) => (
+            <Route key={path} element={<Component />} path={path} />
+          ))}
+        </Routes>
+      </div>
     </div>
   );
 }
