@@ -9,6 +9,7 @@ import Tooltip from "../components/Tooltip";
 import routes from "../routes";
 import NavButton from "./NavButton";
 import NavDisclosure from "./NavDisclosure";
+import Search from "./Search";
 
 interface HeaderProps {
   matchedRoute?: RouteMatch | undefined;
@@ -61,7 +62,7 @@ const Header = ({ matchedRoute }: HeaderProps) => {
                     text={route.name}
                     active={matchedRoute?.route.path === route.path}
                   />
-                  <Tooltip.Panel className="flex w-96 h-52 flex-wrap justify-between items-center bg-background-darker text-primary border-t-2 border-primary rounded-md rounded-t-none">
+                  <Tooltip.Panel className="flex w-96 h-52 flex-wrap justify-between items-center bg-background-darker text-secondary border-t-2 border-secondary rounded-md rounded-t-none">
                     {route.dropdownData?.map((data) => (
                       <NavButton
                         text={data.name}
@@ -74,6 +75,10 @@ const Header = ({ matchedRoute }: HeaderProps) => {
                 </Tooltip>
               )
             )}
+          </div>
+
+          <div className="hidden md:block absolute right-0 p-in">
+            <Search />
           </div>
 
           <Disclosure.Panel static className="lg:hidden">

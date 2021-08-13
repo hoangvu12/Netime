@@ -23,12 +23,12 @@ const Button = (props: ButtonProps) => {
 
   return (
     <div
-      className={classNames(className, active && "border-primary border-b-2")}
+      className={classNames(className, active && "border-secondary border-b-2")}
     >
       {StartIcon && <StartIcon size={14} className="text-white" />}
       <p
         className={classNames(
-          "tracking-wide font-light hover:text-primary duration-300 transition",
+          "tracking-wide font-medium hover:text-secondary duration-300 transition",
           StartIcon && "ml-2",
           EndIcon && "mr-2",
           active ? "text-white text-base" : "text-sm text-gray-300"
