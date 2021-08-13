@@ -35,13 +35,13 @@ const HomePage = () => {
 
       <div className="space-y-6">
         <Section
-          data={latestList}
+          data={latestList?.data}
           title="Mới cập nhật"
           isLoading={isLatestLoading}
         />
 
         <Section
-          data={upcomingList}
+          data={upcomingList?.data}
           title="Sắp chiếu"
           isLoading={isUpcomingLoading}
         />

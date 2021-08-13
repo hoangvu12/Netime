@@ -23,7 +23,7 @@ const TextIcon = (props: TextIconProps) => {
   return (
     <div className={classNames("flex items-center", className)}>
       <Icon size={iconSize} className={iconClassName} />
-      <p className={textClassName}>{text}</p>
+      <p className={classNames("line-clamp-1", textClassName)}>{text}</p>
     </div>
   );
 };

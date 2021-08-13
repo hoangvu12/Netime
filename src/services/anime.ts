@@ -12,17 +12,32 @@ export const getSlide = async (): Promise<Anime[]> => {
   return data.data;
 };
 
-export const getTypeList = (slug: string) => getList("types", slug);
-export const getGenreList = (slug: string) => getList("genres", slug);
-export const getSeasonList = (slug: string) => getList("seasons", slug);
+interface GetListResponse {
+  success: boolean;
+  data: Anime[];
+  pagination: {
+    totalPage: number;
+    currentPage: number;
+  };
+}
 
-export const getList = async (
-  category: string,
-  slug: string
-): Promise<Anime[]> => {
-  const { data } = await instance.get(`/${category}/${slug}`);
+interface GetListData {
+  category: string;
+  slug: string;
+  page?: number;
+  sort?: string;
+}
 
-  return data.data;
+export const getList = async ({
+  category,
+  slug,
+  ...rest
+}: GetListData): Promise<GetListResponse> => {
+  const { data } = await instance.get(`/${category}/${slug}`, {
+    params: rest,
+  });
+
+  return data;
 };
 
 export const getInfo = async (slug: string): Promise<AnimeInfo> => {
