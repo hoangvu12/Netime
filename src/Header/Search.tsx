@@ -1,22 +1,16 @@
-import React, { Fragment, useRef, useState } from "react";
-import { AiOutlineSearch } from "react-icons/ai";
 import { Transition } from "@headlessui/react";
 import classNames from "classnames";
-import { Anime } from "../types";
-
-import searchList from "../data/latestAnime.json";
-import Loader from "../components/Loader";
+import React, { Fragment, useRef, useState } from "react";
+import { AiOutlineSearch } from "react-icons/ai";
 import { Link } from "react-router-dom";
-
-function sleep(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
+import Loader from "../components/Loader";
+import { Anime } from "../types";
 
 const Search = () => {
   const [showResultPanel, setShowResultPanel] = useState(false);
   const [keyword, setKeyword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [list, setList] = useState<Anime[] | []>([]);
+  const [list, setList] = useState<Anime[]>([]);
   const timeout = useRef<NodeJS.Timeout | undefined>();
 
   const handleKeywordChange: React.ChangeEventHandler<HTMLInputElement> = (
@@ -28,12 +22,8 @@ const Search = () => {
       clearTimeout(timeout.current);
     }
 
-    timeout.current = setTimeout(async () => {
-      setIsLoading(true);
-      await sleep(1000);
-
-      setList(searchList);
-      setIsLoading(false);
+    timeout.current = setTimeout(() => {
+      console.log("WILL BE ADDED");
     }, 1000);
   };
 
