@@ -1,11 +1,11 @@
 /* eslint-disable react/self-closing-comp */
+import classNames from "classnames";
 import Hls, { HlsConfig } from "hls.js";
 import PlyrJS, { Options, PlyrEvent as PlyrJSEvent, SourceInfo } from "plyr";
 import "plyr/dist/plyr.css";
 import PropTypes from "prop-types";
 import React, { HTMLProps, MutableRefObject, useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
-import classNames from "classnames";
 import { API_URL } from "../../constants";
 
 export type PlyrInstance = PlyrJS;
@@ -65,6 +65,10 @@ const Plyr: React.FC<PlyrProps> = (props) => {
       if (onReady) {
         onReady(plyrPlayer, event);
       }
+
+      plyrPlayer.on("enterfullscreen", () => {
+        window.screen.orientation.lock("landscape");
+      });
     });
   };
 
@@ -89,10 +93,6 @@ const Plyr: React.FC<PlyrProps> = (props) => {
   useEffect(() => {
     if (!innerRef.current) return;
 
-    if (innerRef.current.plyr) {
-      innerRef.current.plyr.destroy();
-    }
-
     if (videoSource.includes("m3u8") && Hls.isSupported()) {
       hls.current.loadSource(source?.sources[0].src!);
       hls.current.attachMedia(innerRef.current as HTMLMediaElement);
@@ -111,8 +111,6 @@ const Plyr: React.FC<PlyrProps> = (props) => {
     if (innerRef.current?.plyr && source) {
       innerRef.current.plyr.source = source;
     }
-
-    window.screen.orientation.lock("landscape");
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [videoOptions]);

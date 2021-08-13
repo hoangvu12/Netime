@@ -1,12 +1,13 @@
 import classNames from "classnames";
 import { SourceInfo } from "plyr";
-import React, { useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { FaPlay } from "react-icons/fa";
 import { HiArrowNarrowLeft } from "react-icons/hi";
 import { useNavigate, useParams } from "react-router";
 import Button from "../../components/Button";
 import Loader from "../../components/Loader";
 import useDevice from "../../hooks/useDevice";
+import useOrientation from "../../hooks/useOrientiation";
 import useQueryParams from "../../hooks/useQueryParams";
 import EpisodesButton from "./EpisodesButton";
 import useFetchSource from "./useFetchSource";
@@ -19,9 +20,11 @@ const WatchScreen = () => {
   const query = useQueryParams();
   const navigate = useNavigate();
   const { isDesktop } = useDevice();
+  const { isPortrait } = useOrientation();
 
   const [showNextEpButton, setShowNextEpButton] = useState(false);
   const [showPauseScreen, setShowPauseScreen] = useState(false);
+  const [showOrientationScreen, setShowOrientationScreen] = useState(false);
   const [episodeIndex, setEpisodeIndex] = useState(
     Number(query.get("episode_index")) || 0
   );
@@ -52,6 +55,14 @@ const WatchScreen = () => {
   const handleEpisodeClick = (_episode: string, i: number) => {
     setEpisodeIndex(i);
   };
+
+  useEffect(() => {
+    if (isPortrait) {
+      setShowOrientationScreen(true);
+    } else {
+      setShowOrientationScreen(false);
+    }
+  }, [isPortrait]);
 
   const handleReady = (player: PlyrInstance, _event: PlyrEvent) => {
     addButtons([
@@ -135,6 +146,22 @@ const WatchScreen = () => {
           <Button startIcon={FaPlay} className="shadow-lg bg-white text-black">
             Tập tiếp theo
           </Button>
+        </div>
+
+        <div
+          className={classNames(
+            "absolute inset-0 bg-black bg-opacity-90 flex flex-col items-center justify-center",
+            !showOrientationScreen ? "hidden" : "block"
+          )}
+        >
+          <img
+            src="/rotate_landscape.gif"
+            alt="Please rotate your device to landscape"
+          />
+
+          <h1 className="text-center text-white text-xs sm:text-sm font-medium">
+            Chuyển sang chế độ ngang để có trải nghiệm tốt nhất.
+          </h1>
         </div>
 
         <div

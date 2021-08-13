@@ -13,8 +13,6 @@ interface EpisodesButtonProps {
 }
 
 const EpisodesButton = (props: EpisodesButtonProps) => {
-  console.log(props.activeIndex);
-
   return (
     <Menu>
       <Menu.Button>
