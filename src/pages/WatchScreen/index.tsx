@@ -81,15 +81,15 @@ const WatchScreen = () => {
 
     if (isDesktop) {
       document.addEventListener("visibilitychange", () => {
+        if (debounce.current) {
+          clearTimeout(debounce.current);
+        }
+
         if (document.visibilityState === "visible") {
           return;
         }
 
         const timeoutSeconds = 6;
-
-        if (debounce.current) {
-          clearTimeout(debounce.current);
-        }
 
         debounce.current = setTimeout(
           () => setShowPauseScreen(true),
