@@ -1,4 +1,4 @@
-export const API_URL = "https://5dcbbe69f8fc.au.ngrok.io/api/v1"
+export const API_URL = "https://5e8ae3466c96.au.ngrok.io/api/v1"
 
 export const TYPES = [
   { name: "TV/Series", slug: "anime-bo" },
