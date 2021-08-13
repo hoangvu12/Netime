@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { SourceInfo } from "plyr";
+import { Options, SourceInfo } from "plyr";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { FaPlay } from "react-icons/fa";
 import { HiArrowNarrowLeft } from "react-icons/hi";
@@ -52,8 +52,19 @@ const WatchScreen = () => {
     [source]
   );
 
+  const videoOptions = useMemo<Options>(
+    () => ({
+      autoplay: true,
+    }),
+    []
+  );
+
   const handleEpisodeClick = (_episode: string, i: number) => {
     setEpisodeIndex(i);
+  };
+
+  const handleNextEpisodeClick = () => {
+    setEpisodeIndex((i) => i + 1);
   };
 
   useEffect(() => {
@@ -84,9 +95,9 @@ const WatchScreen = () => {
       const triggerTime = 120; // Seconds
 
       if (remainingTime <= triggerTime) {
-        if (!showNextEpButton) {
-          setShowNextEpButton(true);
-        }
+        setShowNextEpButton(true);
+      } else {
+        setShowNextEpButton(false);
       }
     });
 
@@ -127,7 +138,7 @@ const WatchScreen = () => {
   return (
     <div className="absolute bg-background inset-0 w-screen h-screen z-50">
       <div className="relative w-full h-full">
-        <Video source={videoSource} onReady={handleReady} />
+        <Video source={videoSource} onReady={handleReady} options={videoOptions}/>
 
         <div className="absolute top-8 left-8">
           <HiArrowNarrowLeft
@@ -143,7 +154,11 @@ const WatchScreen = () => {
             !showNextEpButton ? "hidden" : "block"
           )}
         >
-          <Button startIcon={FaPlay} className="shadow-lg bg-white text-black">
+          <Button
+            onClick={handleNextEpisodeClick}
+            startIcon={FaPlay}
+            className="shadow-lg bg-white text-black"
+          >
             Tập tiếp theo
           </Button>
         </div>
