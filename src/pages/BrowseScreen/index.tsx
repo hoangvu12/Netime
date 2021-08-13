@@ -60,10 +60,13 @@ const TypeScreen = () => {
           </div>
         )}
 
-        <div className="my-12 flex justify-evenly flex-wrap">
+        <div className="my-12 flex flex-wrap">
           {!isLoading &&
             list?.map((anime) => (
-              <div className="mt-2 w-44" key={anime.slug}>
+              <div
+                className="mt-2 -mr-2 px-2 w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 xl:w-1/6 2xl:w-1/7"
+                key={anime.slug}
+              >
                 <AnimeCard {...anime} />
               </div>
             ))}
