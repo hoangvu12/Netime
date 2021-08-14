@@ -3,16 +3,16 @@ import classNames from "classnames";
 import React, { Fragment, useRef, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import Image from "../components/Image";
-import Loader from "../components/Loader";
-import { Anime } from "../types";
+import Loader from "../../components/Loader";
+import SearchAnimeCard from "./SearchAnimeCard";
+import useSearch from "./useSearch";
 
 const Search = () => {
   const [showResultPanel, setShowResultPanel] = useState(false);
   const [keyword, setKeyword] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [list, setList] = useState<Anime[]>([]);
-  const timeout = useRef<NodeJS.Timeout | undefined>();
+  const timeout = useRef<NodeJS.Timeout | null>(null);
+
+  const { data, isLoading, refetch } = useSearch({ keyword, limit: 12 });
 
   const handleKeywordChange: React.ChangeEventHandler<HTMLInputElement> = (
     e
@@ -23,9 +23,7 @@ const Search = () => {
       clearTimeout(timeout.current);
     }
 
-    timeout.current = setTimeout(() => {
-      console.log("WILL BE ADDED");
-    }, 1000);
+    timeout.current = setTimeout(() => refetch(), 1000);
   };
 
   const handleShowResultPanel = (isVisible: boolean) => {
@@ -33,6 +31,8 @@ const Search = () => {
       setShowResultPanel(isVisible);
     };
   };
+
+  const list = data?.pages.map((page) => page.data).flat();
 
   return (
     <div className="relative w-min">
@@ -63,34 +63,16 @@ const Search = () => {
           )}
         >
           {isLoading ? (
-            <div className="flex items-center justify-center w-full">
+            <div className="flex items-center py-2 justify-center w-full">
               <Loader />
             </div>
           ) : (
-            list.map((anime) => (
-              <div
-                className="flex w-full cursor-pointer rounded-sm p-2 hover:bg-white hover:bg-opacity-10"
-                key={anime.slug}
-              >
-                <Image
-                  src={anime.image}
-                  alt={anime.title}
-                  className="min-w-1/4 max-w-1/4 object-cover h-20 mr-2"
-                />
-
-                <div className="space-y-2">
-                  <h1 className="text-white text-sm font-medium line-clamp-1">
-                    {anime.title}
-                  </h1>
-                  <p className="text-gray-400 line-clamp-2 text-xs">
-                    {anime.description}
-                  </p>
-                </div>
-              </div>
+            list?.map((anime) => (
+              <SearchAnimeCard key={anime.slug} {...anime} />
             ))
           )}
 
-          <Link to="/search">
+          <Link to={`/search?keyword=${keyword}`}>
             <div className="flex items-center p-2 rounded-sm cursor-pointer hover:bg-white hover:bg-opacity-10">
               <div className="bg-secondary p-2 rounded-full mr-2">
                 <AiOutlineSearch size={20} className="text-white" />

@@ -40,6 +40,17 @@ export const getList = async ({
   return data;
 };
 
+export const search = async (
+  keyword: string,
+  limit: number
+): Promise<GetListResponse> => {
+  const { data } = await instance.get(`/search`, {
+    params: { keyword, limit },
+  });
+
+  return data;
+};
+
 export const getInfo = async (slug: string): Promise<AnimeInfo> => {
   const { data } = await instance.get(`/info/${slug}`);
 
