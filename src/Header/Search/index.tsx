@@ -5,14 +5,19 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import Loader from "../../components/Loader";
 import SearchAnimeCard from "./SearchAnimeCard";
-import useSearch from "./useSearch";
+import useSearch from "../../hooks/useSearch";
+import Input from "../../components/Input";
 
 const Search = () => {
   const [showResultPanel, setShowResultPanel] = useState(false);
   const [keyword, setKeyword] = useState("");
   const timeout = useRef<NodeJS.Timeout | null>(null);
 
-  const { data, isLoading, refetch } = useSearch({ keyword, limit: 12 });
+  const { data, isLoading, refetch } = useSearch({
+    keyword,
+    limit: 12,
+    enabled: false,
+  });
 
   const handleKeywordChange: React.ChangeEventHandler<HTMLInputElement> = (
     e
@@ -38,13 +43,12 @@ const Search = () => {
     <div className="relative w-min">
       <div className="flex items-center p-2 rounded-md bg-background-darker">
         <AiOutlineSearch size={20} className="text-gray-500 mr-2" />
-        <input
+        <Input
           onFocus={handleShowResultPanel(true)}
           onBlur={handleShowResultPanel(false)}
           type="text"
           placeholder="Tìm kiém"
           onChange={handleKeywordChange}
-          className="bg-transparent placeholder-gray-500 text-gray-300 focus:outline-none focus:border-none"
         />
       </div>
       <Transition
@@ -72,7 +76,7 @@ const Search = () => {
             ))
           )}
 
-          <Link to={`/search?keyword=${keyword}`}>
+          <Link to={`/search?q=${keyword}`}>
             <div className="flex items-center p-2 rounded-sm cursor-pointer hover:bg-white hover:bg-opacity-10">
               <div className="bg-secondary p-2 rounded-full mr-2">
                 <AiOutlineSearch size={20} className="text-white" />

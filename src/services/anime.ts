@@ -40,12 +40,15 @@ export const getList = async ({
   return data;
 };
 
-export const search = async (
-  keyword: string,
-  limit: number
-): Promise<GetListResponse> => {
+interface SearchProps {
+  keyword: string;
+  limit: number;
+  page: number;
+}
+
+export const search = async (props: SearchProps): Promise<GetListResponse> => {
   const { data } = await instance.get(`/search`, {
-    params: { keyword, limit },
+    params: props,
   });
 
   return data;
