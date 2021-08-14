@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { Options, SourceInfo } from "plyr";
+import { SourceInfo } from "plyr";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { FaPlay } from "react-icons/fa";
 import { HiArrowNarrowLeft } from "react-icons/hi";
@@ -171,6 +171,13 @@ const WatchScreen = () => {
           <h1 className="text-center text-white text-xs sm:text-sm font-medium">
             Chuyển sang chế độ ngang để có trải nghiệm tốt nhất.
           </h1>
+
+          <Button
+            className="text-white my-4 bg-primary"
+            onClick={() => setShowOrientationScreen(false)}
+          >
+            Đóng
+          </Button>
         </div>
 
         <div
