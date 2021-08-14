@@ -35,7 +35,7 @@ const EpisodesButton = (props: EpisodesButtonProps) => {
                 key={index}
                 as="button"
                 className={classNames(
-                  "p-3 block min-w-full rounded-md m-1 w-full hover:bg-opacity-80",
+                  "p-3 block min-w-full rounded-md m-1 hover:bg-opacity-80 line-clamp-5",
                   index === props.activeIndex
                     ? "bg-primary text-white"
                     : "bg-background-lighter"

@@ -206,6 +206,7 @@ Plyr.defaultProps = {
       "settings",
       "fullscreen",
     ],
+    autoplay: true,
   },
 };
 

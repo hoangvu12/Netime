@@ -53,13 +53,6 @@ const WatchScreen = () => {
     [source]
   );
 
-  const videoOptions = useMemo<Options>(
-    () => ({
-      autoplay: true,
-    }),
-    []
-  );
-
   const handleEpisodeClick = (_episode: string, i: number) => {
     setEpisodeIndex(i);
   };
@@ -139,11 +132,7 @@ const WatchScreen = () => {
   return (
     <div className="absolute bg-background inset-0 w-screen h-screen z-50">
       <div className="relative w-full h-full">
-        <Video
-          source={videoSource}
-          onReady={handleReady}
-          options={videoOptions}
-        />
+        <Video source={videoSource} onReady={handleReady} />
 
         <div className="absolute top-8 left-8">
           <HiArrowNarrowLeft

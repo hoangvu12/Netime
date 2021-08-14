@@ -29,12 +29,11 @@ const MobileMenu = ({
       <div className="overflow-y-scroll w-40 h-screen px-4 py-4 pb-20 space-y-2 absolute bg-background-darker top-16 left-0">
         {headerRoutes.map((route) =>
           !route.dropdown ? (
-            <div>
+            <div key={route.path}>
               <NavButton
                 to={route.path}
                 text={route.name}
                 active={matchedRoute?.route.path === route.path}
-                key={route.path}
               />
             </div>
           ) : (

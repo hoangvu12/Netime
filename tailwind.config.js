@@ -18,18 +18,18 @@ module.exports = {
       fontSize: {
         ti: ["0.5rem", "0.75rem"],
       },
-    },
-    minHeight: {
-      11: "11rem",
-    },
-    maxHeight: {
-      60: "15rem",
-    },
-    minWidth: {
-      "1/4": "25%",
-    },
-    maxWidth: {
-      "1/4": "25%",
+      minHeight: {
+        11: "11rem",
+      },
+      maxHeight: {
+        60: "15rem",
+      },
+      minWidth: {
+        "1/4": "25%",
+      },
+      maxWidth: {
+        "1/4": "25%",
+      },
     },
   },
   variants: {
