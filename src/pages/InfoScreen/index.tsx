@@ -48,22 +48,22 @@ const InfoScreen = () => {
 
   return (
     <div className="w-full space-y-12 flex flex-col">
-      <div className="relative w-5/6 self-center">
+      <div className="relative w-full md:w-5/6 self-center">
         <Image
           src={info?.backgroundImage!}
           alt={info?.title}
           className="object-cover w-full rounded-md"
         />
         <div className="flex absolute inset-0 bg-black bg-opacity-80">
-          <div className="flex w-full px-8 md:py-6 lg:py-14 self-end">
+          <div className="flex w-full px-8 py-4 md:py-6 lg:py-14 self-end">
             <Image
               src={info?.image!}
               alt={info?.title}
-              className="object-cover w-30 h-40 md:w-40 md:h-60 lg:h-72 mr-4 rounded-md"
+              className="hidden md:block object-cover w-30 h-40 md:w-40 md:h-60 lg:h-72 mr-4 rounded-md"
             />
             <div className="w-full self-end space-y-2">
               <div>
-                <h1 className="text-white text-sm md:text-lg lg:text-3xl line-clamp-2 md:line-clamp-none font-medium">
+                <h1 className="text-white text-sm md:text-lg lg:text-3xl line-clamp-1 sm:line-clamp-2 md:line-clamp-none font-medium">
                   {info?.title}
                 </h1>
                 <h1 className="text-white text-xs md:text-sm lg:text-xl line-clamp-1 font-medium">
