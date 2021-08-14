@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from "react";
+import React, { PropsWithChildren, useCallback, useState } from "react";
 import Slider, { Settings } from "react-slick";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import classNames from "classnames";
@@ -52,9 +52,32 @@ const defaultSettings = {
 };
 
 const Carousel = (props: PropsWithChildren<CarouselProps>) => {
+  const [swiped, setSwiped] = useState(false);
+
+  const handleSwiped = useCallback(() => {
+    setSwiped(true);
+  }, [setSwiped]);
+
+  const handleOnItemClick = useCallback(
+    (e) => {
+      if (swiped) {
+        e.stopPropagation();
+        e.preventDefault();
+        setSwiped(false);
+      }
+    },
+    [swiped]
+  );
+
   const settings = { ...defaultSettings, ...props.settings };
 
-  return <Slider {...settings}>{props.children}</Slider>;
+  return (
+    <Slider onSwipe={handleSwiped} {...settings}>
+      {React.Children.map(props.children, (child) => (
+        <div onClickCapture={handleOnItemClick}>{child}</div>
+      ))}
+    </Slider>
+  );
 };
 
 export default Carousel;
