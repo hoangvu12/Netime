@@ -6,6 +6,7 @@ import { Genre, Route, Season, Type } from "./types";
 const HomeScreen = lazyLoading(() => import("./pages/HomePage"));
 const BrowseScreen = lazyLoading(() => import("./pages/BrowseScreen"));
 const InfoScreen = lazyLoading(() => import("./pages/InfoScreen"));
+const SearchScreen = lazyLoading(() => import("./pages/SearchScreen"));
 const WatchScreen = lazyLoading(() => import("./pages/WatchScreen"));
 
 const routes: Route[] = [
@@ -57,6 +58,12 @@ const routes: Route[] = [
     name: "Xem phim",
     path: "/watch/:slug",
     component: WatchScreen,
+    header: false,
+  },
+  {
+    name: "Tìm kiếm",
+    path: "/search",
+    component: SearchScreen,
     header: false,
   },
 ];

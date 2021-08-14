@@ -8,6 +8,7 @@ import {
 import { BiTime } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { Anime } from "../types";
+import Image from "./Image";
 import TextIcon from "./TextIcon";
 
 interface AnimeCardProps extends Anime {
@@ -18,7 +19,7 @@ const AnimeCard = (props: AnimeCardProps) => {
   return (
     <Link to={`/info/${props.slug}`}>
       <div className={classNames("relative shadow-lg group", props.className)}>
-        <img
+        <Image
           src={props.image}
           alt={props.title}
           className={classNames(

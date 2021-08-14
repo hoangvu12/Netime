@@ -4,6 +4,7 @@ import React from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { RouteMatch } from "react-router";
 import { Link } from "react-router-dom";
+import Image from "../components/Image";
 import DesktopMenu from "./DesktopMenu";
 import MobileMenu from "./MobileMenu";
 import Search from "./Search";
@@ -23,7 +24,7 @@ const Header = ({ matchedRoute }: HeaderProps) => {
         <>
           <div className="absolute left-0 p-in">
             <Link to="/">
-              <img src="/logo.png" alt="logo" />
+              <Image src="/logo.png" alt="logo" />
             </Link>
           </div>
 

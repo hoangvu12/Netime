@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router";
 import { Link } from "react-router-dom";
 import AnimeCarousel from "../../components/AnimeCarousel";
 import Button from "../../components/Button";
+import Image from "../../components/Image";
 import Loader from "../../components/Loader";
 import useFetchInfo from "./useFetchInfo";
 
@@ -48,15 +49,15 @@ const InfoScreen = () => {
   return (
     <div className="w-full space-y-12 flex flex-col">
       <div className="relative w-5/6 self-center">
-        <img
-          src={info?.backgroundImage}
+        <Image
+          src={info?.backgroundImage!}
           alt={info?.title}
           className="object-cover w-full rounded-md"
         />
         <div className="flex absolute inset-0 bg-black bg-opacity-80">
           <div className="flex w-full px-8 md:py-6 lg:py-14 self-end">
-            <img
-              src={info?.image}
+            <Image
+              src={info?.image!}
               alt={info?.title}
               className="object-cover w-30 h-40 md:w-40 md:h-60 lg:h-72 mr-4 rounded-md"
             />

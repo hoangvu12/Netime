@@ -5,6 +5,7 @@ import { FaPlay } from "react-icons/fa";
 import { HiArrowNarrowLeft } from "react-icons/hi";
 import { useNavigate, useParams } from "react-router";
 import Button from "../../components/Button";
+import Image from "../../components/Image";
 import Loader from "../../components/Loader";
 import useDevice from "../../hooks/useDevice";
 import useOrientation from "../../hooks/useOrientiation";
@@ -138,7 +139,11 @@ const WatchScreen = () => {
   return (
     <div className="absolute bg-background inset-0 w-screen h-screen z-50">
       <div className="relative w-full h-full">
-        <Video source={videoSource} onReady={handleReady} options={videoOptions}/>
+        <Video
+          source={videoSource}
+          onReady={handleReady}
+          options={videoOptions}
+        />
 
         <div className="absolute top-8 left-8">
           <HiArrowNarrowLeft
@@ -169,7 +174,7 @@ const WatchScreen = () => {
             !showOrientationScreen ? "hidden" : "block"
           )}
         >
-          <img
+          <Image
             src="/rotate_landscape.gif"
             alt="Please rotate your device to landscape"
           />

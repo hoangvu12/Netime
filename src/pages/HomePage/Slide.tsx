@@ -7,6 +7,7 @@ import {
 } from "react-icons/ai";
 import { BiTime } from "react-icons/bi";
 import { Link } from "react-router-dom";
+import Image from "../../components/Image";
 import TextIcon from "../../components/TextIcon";
 import { Anime } from "../../types";
 
@@ -69,7 +70,7 @@ const Slide = (props: Anime) => {
             </div>
           </div>
         </div>
-        <img
+        <Image
           src={props.image}
           key={props.slug}
           alt={props.title}
