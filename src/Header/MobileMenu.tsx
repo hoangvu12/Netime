@@ -29,12 +29,14 @@ const MobileMenu = ({
       <div className="overflow-y-scroll w-40 h-screen px-4 py-4 pb-20 space-y-2 absolute bg-background-darker top-16 left-0">
         {headerRoutes.map((route) =>
           !route.dropdown ? (
-            <NavButton
-              to={route.path}
-              text={route.name}
-              active={matchedRoute?.route.path === route.path}
-              key={route.path}
-            />
+            <div>
+              <NavButton
+                to={route.path}
+                text={route.name}
+                active={matchedRoute?.route.path === route.path}
+                key={route.path}
+              />
+            </div>
           ) : (
             <NavDisclosure
               button={
@@ -46,8 +48,7 @@ const MobileMenu = ({
                   endIcon={BsChevronDown}
                 />
               }
-              className="space-y-2"
-              panelClassName="space-y-1 bg-background-lighter p-2"
+              panelClassName="bg-background-lighter p-2"
               key={route.path}
             >
               {route.dropdownData?.map((data) => (

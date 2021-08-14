@@ -64,7 +64,7 @@ const routes: Route[] = [
     name: "Tìm kiếm",
     path: "/search",
     component: SearchScreen,
-    header: false,
+    header: true,
   },
 ];
 
