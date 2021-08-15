@@ -1,4 +1,7 @@
 export const API_URL = "https://5e8ae3466c96.au.ngrok.io/api/v1";
+export const GITHUB_URL = "https://github.com/hoangvu12/Netime";
+export const FACEBOOK_URL = "https://www.facebook.com/nguyenvuzxc1/";
+export const DISCORD_NAME = "VuNguyen#5055";
 
 export const TYPES = [
   { name: "TV/Series", slug: "anime-bo" },

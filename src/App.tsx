@@ -1,5 +1,6 @@
 import React from "react";
 import { matchRoutes, Route, Routes, useLocation } from "react-router";
+import Footer from "./Footer";
 import Header from "./Header";
 import routes from "./routes";
 
@@ -25,6 +26,8 @@ function App() {
           ))}
         </Routes>
       </div>
+
+      <Footer />
     </div>
   );
 }
