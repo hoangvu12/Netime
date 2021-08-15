@@ -48,8 +48,16 @@ Or here is [live example](https://netime.vercel.app)
 - <s>Guide tour in watch screen.</s> ❌
 - <s>Footer</s> ✔️
 - More compatible with mobile devices
+- Meta Tags
+- Save user's episodes. (Maybe using localStorage, or a database if I have time.)
 - Skeleton loading
-- Maybe a domain?
+- Comments
+
+#### Maybe
+
+- A domain
+- Comics section to read.
+- Authorization system (If I have enough time.)
 
 ## Sources
 
