@@ -45,8 +45,8 @@ Or here is [live example](https://netime.vercel.app)
 
 ## Todo
 
-- <s>Guide tour in watch screen.</s> ✖
-- Footer
+- <s>Guide tour in watch screen.</s> ❌
+- <s>Footer</s> ✔️
 - More compatible with mobile devices
 - Skeleton loading
 - Maybe a domain?
