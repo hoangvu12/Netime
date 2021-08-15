@@ -3,17 +3,19 @@ import React from "react";
 import { Link } from "react-router-dom";
 import AnimeCarousel from "../../components/AnimeCarousel";
 import Loader from "../../components/Loader";
-import { Anime } from "../../types";
+import useFetchList from "../../hooks/useFetchList";
 
 interface SectionProps {
   title: string;
-  data: Anime[] | undefined;
-  isLoading?: boolean;
+  category: string;
+  slug: string;
   to?: To;
 }
 
 const Section = (props: SectionProps) => {
-  const { title, data = [], isLoading = false, to } = props;
+  const { title, to, category, slug } = props;
+
+  const { data, isLoading } = useFetchList(category, slug);
 
   return (
     <div className="mt-6">
@@ -28,7 +30,7 @@ const Section = (props: SectionProps) => {
         )}
       </div>
 
-      {isLoading ? <Loader /> : <AnimeCarousel data={data} />}
+      {isLoading ? <Loader /> : <AnimeCarousel data={data?.data} />}
     </div>
   );
 };
