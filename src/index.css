@@ -9,23 +9,12 @@ body {
 }
 
 .tooltip-panel {
-  @apply invisible;
+  @apply opacity-0 transition-all duration-300 invisible;
 }
 
-.vjs-control-bar {
-  @apply bg-gradient-to-b from-transparent to-black bg-opacity-60;
-}
-
-.vjs-control-bar-center-text {
-  @apply text-white font-medium text-2xl;
-}
-
-.video-js .vjs-play-progress:before {
-  @apply text-primary;
-}
-
-.video-js .vjs-play-progress {
-  @apply bg-primary;
+.tooltip:hover .tooltip-panel,
+.tooltip-panel:hover {
+  @apply opacity-100 z-10 visible;
 }
 
 .tooltip::after {
@@ -51,11 +40,6 @@ body {
 
 .slick-dots li.slick-active button:before {
   @apply text-white;
-}
-
-.tooltip:hover .tooltip-panel,
-.tooltip-panel:hover {
-  @apply visible z-10;
 }
 
 ::-webkit-scrollbar {
