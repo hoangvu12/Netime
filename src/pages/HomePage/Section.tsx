@@ -1,4 +1,6 @@
+import { To } from "history";
 import React from "react";
+import { Link } from "react-router-dom";
 import AnimeCarousel from "../../components/AnimeCarousel";
 import Loader from "../../components/Loader";
 import { Anime } from "../../types";
@@ -7,14 +9,24 @@ interface SectionProps {
   title: string;
   data: Anime[] | undefined;
   isLoading?: boolean;
+  to?: To;
 }
 
 const Section = (props: SectionProps) => {
-  const { title, data = [], isLoading = false } = props;
+  const { title, data = [], isLoading = false, to } = props;
 
   return (
     <div className="mt-6">
-      <h1 className="text-2xl text-white font-medium ml-2 mb-3">{title}</h1>
+      <div className="flex items-baseline justify-between space-x-2 text-white mb-3">
+        <h1 className="text-2xl font-medium">{title}</h1>
+        {to && (
+          <Link to={to}>
+            <h1 className="text-base text-gray-400 hover:text-secondary transition duration-300">
+              Xem tất cả
+            </h1>
+          </Link>
+        )}
+      </div>
 
       {isLoading ? <Loader /> : <AnimeCarousel data={data} />}
     </div>

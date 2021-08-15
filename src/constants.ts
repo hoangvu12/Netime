@@ -1,7 +1,8 @@
-export const API_URL = "https://5e8ae3466c96.au.ngrok.io/api/v1"
+export const API_URL = "https://5e8ae3466c96.au.ngrok.io/api/v1";
 
 export const TYPES = [
   { name: "TV/Series", slug: "anime-bo" },
+  { name: "Mới cập nhật", slug: "anime-moi" },
   { name: "Movie/OVA", slug: "anime-le" },
   { name: "HH Trung Quốc", slug: "hoat-hinh-trung-quoc" },
   { name: "Anime Sắp Chiếu", slug: "anime-sap-chieu" },

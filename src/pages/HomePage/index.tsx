@@ -38,12 +38,14 @@ const HomePage = () => {
           data={latestList?.data}
           title="Mới cập nhật"
           isLoading={isLatestLoading}
+          to="/types/anime-moi"
         />
 
         <Section
           data={upcomingList?.data}
           title="Sắp chiếu"
           isLoading={isUpcomingLoading}
+          to="/types/anime-sap-chieu"
         />
       </div>
     </div>
