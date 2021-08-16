@@ -4,7 +4,13 @@ import Hls, { HlsConfig } from "hls.js";
 import PlyrJS, { Options, PlyrEvent as PlyrJSEvent, SourceInfo } from "plyr";
 import "plyr/dist/plyr.css";
 import PropTypes from "prop-types";
-import React, { HTMLProps, MutableRefObject, useEffect, useRef } from "react";
+import React, {
+  HTMLProps,
+  MutableRefObject,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import ReactDOM from "react-dom";
 import { API_URL } from "../../constants";
 
@@ -18,6 +24,7 @@ export type PlyrProps = HTMLProps<HTMLVideoElement> & {
   source?: SourceInfo;
   options?: Options;
   onReady?: (player: PlyrJS, event: PlyrJS.PlyrEvent) => void;
+  onSourceChange?: (player: PlyrJS) => void;
 };
 
 export interface HTMLPlyrVideoElement {
@@ -34,8 +41,9 @@ const hlsConfig: Partial<HlsConfig> = {
 };
 
 const Plyr: React.FC<PlyrProps> = (props) => {
-  const { options = null, source, onReady, ...rest } = props;
+  const { options = null, source, onReady, onSourceChange, ...rest } = props;
   const videoSource = source?.sources[0].src!;
+  const [player, setPlayer] = useState<PlyrInstance | undefined>();
 
   const innerRef = useRef<HTMLPlyrVideoElement>();
   const hls = useRef(new Hls(hlsConfig));
@@ -49,22 +57,17 @@ const Plyr: React.FC<PlyrProps> = (props) => {
   };
 
   const createPlayer = () => {
+    const plyrPlayer = new PlyrJS(".plyr-react", videoOptions);
     isListening = false;
 
-    const plyrPlayer = new PlyrJS(".plyr-react", videoOptions);
-
-    if (innerRef.current?.plyr) {
-      innerRef.current.plyr = plyrPlayer;
-    }
-
     plyrPlayer.on("ready", (event) => {
+      setPlayer(plyrPlayer);
+
       if (isListening) return;
 
       isListening = true;
 
-      if (onReady) {
-        onReady(plyrPlayer, event);
-      }
+      onReady?.(plyrPlayer, event);
 
       plyrPlayer.on("enterfullscreen", () => {
         window.screen.orientation.lock("landscape");
@@ -91,15 +94,19 @@ const Plyr: React.FC<PlyrProps> = (props) => {
   });
 
   useEffect(() => {
+    onSourceChange?.(player!);
+  }, [player, onSourceChange]);
+
+  useEffect(() => {
     if (!innerRef.current) return;
 
     if (videoSource.includes("m3u8") && Hls.isSupported()) {
-      hls.current.loadSource(source?.sources[0].src!);
+      hls.current.loadSource(videoSource);
       hls.current.attachMedia(innerRef.current as HTMLMediaElement);
 
-      innerRef.current.plyr?.on("play", () => hls.current.startLoad());
+      player?.on("play", () => hls.current.startLoad());
 
-      innerRef.current.plyr?.on("qualitychange", () => {
+      player?.on("qualitychange", () => {
         if (innerRef.current?.plyr?.currentTime !== 0) {
           hls.current.startLoad();
         }
@@ -108,12 +115,9 @@ const Plyr: React.FC<PlyrProps> = (props) => {
       createPlayer();
     }
 
-    if (innerRef.current?.plyr && source) {
-      innerRef.current.plyr.source = source;
-    }
-
+    return () => player?.destroy();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [videoOptions]);
+  }, [videoSource]);
 
   return (
     <video
@@ -124,26 +128,33 @@ const Plyr: React.FC<PlyrProps> = (props) => {
   );
 };
 
-export const addButtons = (
-  buttons: {
-    component: JSX.Element;
-    position?: number;
-    className?: string;
-  }[]
-) => {
-  buttons.forEach(({ component, position = -1, className }) =>
-    addButton(component, position, className)
-  );
+export const addButtons = (buttons: Button[]) => {
+  buttons.forEach((button) => {
+    addButton(button);
+  });
 };
 
-const addButton = (
-  button: JSX.Element,
-  position: number,
-  className?: string
-) => {
+interface Button {
+  component: JSX.Element;
+  position: number;
+  id: string;
+  className?: string;
+}
+
+const addButton = (button: Button) => {
+  const { component, id, position, className } = button;
+
+  // Remove existing button if it exists.
+  const existingButton = document.querySelector(`.plyr_buttons--${id}`);
+  existingButton?.remove();
+
   const controls = document.querySelector(".plyr__controls");
   const div = document.createElement("div");
-  div.className = classNames("plyr__controls__item plyr__control", className);
+  div.className = classNames(
+    "plyr__controls__item plyr__control",
+    `plyr_buttons--${id}`,
+    className
+  );
 
   const controlsChildNodes = controls?.childNodes;
 
@@ -155,7 +166,7 @@ const addButton = (
         : controlsChildNodes[position - 1]
     );
 
-    ReactDOM.render(button, div);
+    ReactDOM.render(component, div);
   }
 };
 

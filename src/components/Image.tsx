@@ -21,11 +21,11 @@ const Image = (props: ImgProps) => {
       unloader={
         <div
           className={classNames(
-            "flex items-center justify-center",
-            props.className
+            "flex items-center justify-center p-4",
+            classes
           )}
         >
-          <h1 className="text-white text-base">
+          <h1 className="text-center text-white text-base">
             Lỗi khi load ảnh {props.alt || ""}
           </h1>
         </div>

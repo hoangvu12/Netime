@@ -13,7 +13,7 @@ import useQueryParams from "../../hooks/useQueryParams";
 import EpisodesButton from "./EpisodesButton";
 import useFetchSource from "./useFetchSource";
 import useFetchWatchInfo from "./useFetchWatchInfo";
-import Video, { addButtons, PlyrEvent, PlyrInstance } from "./Video";
+import Video, { addButtons, PlyrInstance } from "./Video";
 import "./Video.css";
 
 const WatchScreen = () => {
@@ -54,6 +54,13 @@ const WatchScreen = () => {
   );
 
   const handleEpisodeClick = (_episode: string, i: number) => {
+    // if (
+    //   window.screen.width === window.innerWidth &&
+    //   window.screen.height === window.innerHeight
+    // ) {
+    //   document.documentElement.requestFullscreen();
+    // }
+
     setEpisodeIndex(i);
   };
 
@@ -82,7 +89,7 @@ const WatchScreen = () => {
     };
   }, []);
 
-  const handleReady = (player: PlyrInstance, _event: PlyrEvent) => {
+  const handleSourceChange = () => {
     addButtons([
       {
         component: (
@@ -92,11 +99,14 @@ const WatchScreen = () => {
             activeIndex={episodeIndex}
           />
         ),
+        id: "episodes-button",
         position: 6,
         className: "flex items-center justify-center",
       },
     ]);
+  };
 
+  const handleReady = (player: PlyrInstance) => {
     player.on("timeupdate", () => {
       const remainingTime = Math.round(player.duration - player.currentTime);
       const triggerTime = 120; // Seconds
@@ -145,7 +155,11 @@ const WatchScreen = () => {
   return (
     <div className="absolute bg-background inset-0 w-screen h-screen z-50">
       <div className="relative w-full h-full">
-        <Video source={videoSource} onReady={handleReady} />
+        <Video
+          source={videoSource}
+          onReady={handleReady}
+          onSourceChange={handleSourceChange}
+        />
 
         <div className="absolute top-8 left-8">
           <HiArrowNarrowLeft

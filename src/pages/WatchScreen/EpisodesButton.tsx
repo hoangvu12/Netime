@@ -27,7 +27,7 @@ const EpisodesButton = (props: EpisodesButtonProps) => {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="rounded-md text-white overflow-y-scroll absolute space-y-2 right-0 bottom-full p-6 h-60 w-56 mt-2 origin-top-right bg-background shadow-lg focus:outline-none">
+        <Menu.Items className="no-tap-highlight rounded-md text-white overflow-y-scroll absolute space-y-2 right-0 bottom-full p-6 h-60 w-56 mt-2 origin-top-right bg-background shadow-lg focus:outline-none">
           <h1 className="text-white font-medium">Tập phim</h1>
           <div className="w-full space-y-2">
             {props.episodes.map((episode, index) => (
@@ -35,7 +35,7 @@ const EpisodesButton = (props: EpisodesButtonProps) => {
                 key={index}
                 as="button"
                 className={classNames(
-                  "p-3 block min-w-full rounded-md m-1 hover:bg-opacity-80 line-clamp-5",
+                  "no-tap-highlight p-3 block min-w-full rounded-md m-1 hover:bg-opacity-80 line-clamp-5",
                   index === props.activeIndex
                     ? "bg-primary text-white"
                     : "bg-background-lighter"

@@ -9,6 +9,10 @@ body {
   overflow-x: hidden;
 }
 
+.no-tap-highlight {
+  -webkit-tap-highlight-color: transparent;
+}
+
 .tooltip-panel {
   @apply opacity-0 transition-all duration-300 invisible;
 }
