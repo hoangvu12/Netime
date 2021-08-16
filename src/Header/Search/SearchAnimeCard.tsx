@@ -13,7 +13,7 @@ const SearchAnimeCard = (anime: Anime) => {
         <Image
           src={anime.image}
           alt={anime.title}
-          className="min-w-1/4 max-w-1/4 object-cover h-20 mr-2"
+          className="min-w-1/4 w-1/4 max-w-1/4 object-cover h-20 mr-2"
         />
 
         <div className="space-y-2">

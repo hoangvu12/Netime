@@ -1,31 +1,26 @@
-import React, { useState } from "react";
+import React from "react";
 import { Img, ImgProps } from "react-image";
-import Loader from "./Loader";
+import classNames from "classnames";
+import Skeleton from "./Skeleton";
 
 const Image = (props: ImgProps) => {
-  const [dimensions, setDimensions] = useState({
-    height: 0,
-    width: 0,
-  });
-
-  const handleImageLoad: React.ReactEventHandler<HTMLImageElement> = ({
-    currentTarget,
-  }) => {
-    const { offsetWidth, offsetHeight } = currentTarget;
-
-    setDimensions({
-      height: offsetHeight,
-      width: offsetWidth,
-    });
-  };
-
   return (
     <Img
-      onLoad={handleImageLoad}
-      onError={handleImageLoad}
       loader={
-        <div style={dimensions} className="flex justify-center items-center">
-          <Loader />
+        <Skeleton>
+          <div className={classNames("bg-gray-600", props.className)}></div>
+        </Skeleton>
+      }
+      unloader={
+        <div
+          className={classNames(
+            "flex items-center justify-center",
+            props.className
+          )}
+        >
+          <h1 className="text-white text-base">
+            Lỗi khi load ảnh {props.alt || ""}
+          </h1>
         </div>
       }
       {...props}

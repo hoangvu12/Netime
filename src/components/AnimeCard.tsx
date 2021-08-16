@@ -9,7 +9,6 @@ import { BiTime } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { Anime } from "../types";
 import Image from "./Image";
-import Skeleton from "./Skeleton";
 import TextIcon from "./TextIcon";
 
 interface AnimeCardProps extends Anime {
@@ -26,11 +25,6 @@ const AnimeCard = (props: AnimeCardProps) => {
           className={classNames(
             "w-full h-48 md:h-60 lg:h-80 object-cover rounded-md rounded-b-none"
           )}
-          loader={
-            <Skeleton>
-              <div className="w-full h-48 md:h-60 lg:h-80 animate-pulse bg-gray-600"></div>
-            </Skeleton>
-          }
         />
 
         {props.isUpcoming && (
