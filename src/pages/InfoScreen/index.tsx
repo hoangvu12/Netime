@@ -6,7 +6,6 @@ import AnimeCarousel from "../../components/AnimeCarousel";
 import Button from "../../components/Button";
 import Image from "../../components/Image";
 import Loader from "../../components/Loader";
-import Skeleton from "../../components/Skeleton";
 import useFetchInfo from "./useFetchInfo";
 
 const InfoScreen = () => {
@@ -42,18 +41,13 @@ const InfoScreen = () => {
               className={classNames(
                 "mx-auto filter blur-none w-44 lg:w-52 h-60 lg:h-80 object-cover rounded-md md:rounded-b-none"
               )}
-              loader={
-                <Skeleton>
-                  <div className="w-full h-48 md:h-60 lg:h-80 animate-pulse bg-gray-600"></div>
-                </Skeleton>
-              }
             />
             <div
               className={classNames(
                 "text-white md:bg-background-darker p-3 w-full space-y-2 rounded-b-md min-h-11"
               )}
             >
-              <h1 className="text-base line-clamp-1">{info?.altTitle}</h1>
+              <h1 className="text-base line-clamp-2">{info?.altTitle}</h1>
 
               <div>
                 <h1 className="text-sm line-clamp-1">
