@@ -3,12 +3,19 @@ import { Img, ImgProps } from "react-image";
 import classNames from "classnames";
 import Skeleton from "./Skeleton";
 
+const allowedTexts = ["w-", "h-"];
+
+const isAllowedText = (text: string) =>
+  allowedTexts.find((allowedText) => text.includes(allowedText));
+
 const Image = (props: ImgProps) => {
+  const classes = props.className?.split(" ").filter(isAllowedText);
+
   return (
     <Img
       loader={
         <Skeleton>
-          <div className={classNames("bg-gray-600", props.className)}></div>
+          <div className={classNames("bg-gray-600", classes)}></div>
         </Skeleton>
       }
       unloader={
