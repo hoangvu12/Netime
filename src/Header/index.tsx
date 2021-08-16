@@ -15,7 +15,7 @@ interface HeaderProps {
 const Header = ({ matchedRoute }: HeaderProps) => {
   return (
     <Disclosure
-      as="div"
+      as="header"
       className={classNames(
         "fixed z-30 px-4 flex justify-center items-center w-screen h-16 bg-background-lighter"
       )}

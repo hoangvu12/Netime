@@ -69,6 +69,19 @@ const WatchScreen = () => {
     }
   }, [isPortrait]);
 
+  // Remove footer and header
+  useEffect(() => {
+    const footer = document.querySelector("footer");
+    const header = document.querySelector("header");
+    footer?.classList.add("hidden");
+    header?.classList.add("hidden");
+
+    return () => {
+      footer?.classList.remove("hidden");
+      header?.classList.remove("hidden");
+    };
+  }, []);
+
   const handleReady = (player: PlyrInstance, _event: PlyrEvent) => {
     addButtons([
       {
