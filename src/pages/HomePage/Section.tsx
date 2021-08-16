@@ -2,7 +2,6 @@ import { To } from "history";
 import React from "react";
 import { Link } from "react-router-dom";
 import AnimeCarousel from "../../components/AnimeCarousel";
-import Loader from "../../components/Loader";
 import useFetchList from "../../hooks/useFetchList";
 
 interface SectionProps {
@@ -30,7 +29,7 @@ const Section = (props: SectionProps) => {
         )}
       </div>
 
-      {isLoading ? <Loader /> : <AnimeCarousel data={data?.data} />}
+      <AnimeCarousel data={data?.data} isLoading={isLoading} />
     </div>
   );
 };

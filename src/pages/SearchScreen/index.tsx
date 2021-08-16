@@ -4,8 +4,10 @@ import { useNavigate } from "react-router";
 import AnimeCard from "../../components/AnimeCard";
 import Input from "../../components/Input";
 import Loader from "../../components/Loader";
+import Skeleton from "../../components/Skeleton";
 import useQueryParams from "../../hooks/useQueryParams";
 import useSearch from "../../hooks/useSearch";
+import AnimeCardSkeleton from "../../skeletons/AnimeCardSkeleton";
 
 const SearchScreen = () => {
   const query = useQueryParams();
@@ -60,9 +62,14 @@ const SearchScreen = () => {
         </div>
 
         {isLoading && (
-          <div className="w-full flex justify-center items-center">
-            <Loader />
-          </div>
+          <Skeleton className="my-12 flex flex-wrap">
+            {new Array(18).fill(null).map((_, i) => (
+              <AnimeCardSkeleton
+                key={i}
+                className="mt-2 w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 xl:w-1/6 2xl:w-1/7"
+              />
+            ))}
+          </Skeleton>
         )}
 
         <div className="my-12 flex flex-wrap">

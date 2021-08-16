@@ -1,6 +1,6 @@
 import React from "react";
 import Carousel from "../../components/Carousel";
-import Loader from "../../components/Loader";
+import Skeleton from "../../components/Skeleton";
 import Section from "./Section";
 import Slide from "./Slide";
 import useFetchSlide from "./useFetchSlide";
@@ -34,10 +34,12 @@ const HomePage = () => {
   const { data: slides, isLoading: isSlideLoading } = useFetchSlide();
 
   return (
-    <div className="w-full space-y-6">
+    <div className="w-full h-full space-y-6">
       <div className="hidden md:block">
         {isSlideLoading ? (
-          <Loader />
+          <Skeleton className="w-full h-full">
+            <div className="bg-gray-600 h-96 w-full"></div>
+          </Skeleton>
         ) : (
           <Carousel>
             {slides?.map((slide) => (

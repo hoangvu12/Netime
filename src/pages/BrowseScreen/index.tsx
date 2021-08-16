@@ -4,12 +4,14 @@ import { useLocation } from "react-router";
 import AnimeCard from "../../components/AnimeCard";
 import Loader from "../../components/Loader";
 import Select from "../../components/Select";
+import Skeleton from "../../components/Skeleton";
 import { GENRES, SEASONS, SORTS, TYPES } from "../../constants";
+import AnimeCardSkeleton from "../../skeletons/AnimeCardSkeleton";
 import useBrowseList from "./useBrowseList";
 
 const ALL = [...TYPES, ...GENRES, ...SEASONS];
 
-const TypeScreen = () => {
+const BrowseScreen = () => {
   const [selectedSorting, setSelectedSorting] = useState(SORTS[0].slug);
   const { pathname } = useLocation();
 
@@ -55,9 +57,14 @@ const TypeScreen = () => {
         </div>
 
         {isLoading && (
-          <div className="w-full flex justify-center items-center">
-            <Loader />
-          </div>
+          <Skeleton className="my-12 flex flex-wrap">
+            {new Array(18).fill(null).map((_, i) => (
+              <AnimeCardSkeleton
+                key={i}
+                className="mt-2 w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 xl:w-1/6 2xl:w-1/7"
+              />
+            ))}
+          </Skeleton>
         )}
 
         <div className="my-12 flex flex-wrap">
@@ -82,4 +89,4 @@ const TypeScreen = () => {
   );
 };
 
-export default TypeScreen;
+export default BrowseScreen;
