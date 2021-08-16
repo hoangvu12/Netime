@@ -47,11 +47,12 @@ Or here is [live example](https://netime.vercel.app)
 
 - <s>Guide tour in watch screen.</s> ❌
 - <s>Footer</s> ✔️
+- <s>Skeleton loading</s> ✔️
 - More compatible with mobile devices
 - Meta Tags
 - Save user's episodes. (Maybe using localStorage, or a database if I have time.)
-- Skeleton loading
 - Comments
+- Restyle InfoScreen
 
 #### Maybe
 
