@@ -34,7 +34,7 @@ const HomePage = () => {
   const { data: slides, isLoading: isSlideLoading } = useFetchSlide();
 
   return (
-    <div className="w-full h-full space-y-6">
+    <div className="px-8 py-20 lg:px-20 lg:py-24 w-full h-full space-y-6">
       <div className="hidden md:block">
         {isSlideLoading ? (
           <Skeleton className="w-full h-full">

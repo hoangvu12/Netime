@@ -52,7 +52,7 @@ Or here is [live example](https://netime.vercel.app)
 - Meta Tags
 - Save user's episodes. (Maybe using localStorage, or a database if I have time.)
 - Comments
-- Restyle InfoScreen
+- <s>Restyle InfoScreen</s> ✔️
 
 #### Maybe
 

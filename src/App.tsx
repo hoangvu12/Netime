@@ -19,7 +19,7 @@ function App() {
     <div className="App">
       <Header matchedRoute={matchedRoute} />
 
-      <div className="px-8 py-20 lg:px-20 lg:py-24 min-h-screen">
+      <div className="min-h-screen">
         <Routes>
           {routes.map(({ path, component: Component }) => (
             <Route key={path} element={<Component />} path={path} />

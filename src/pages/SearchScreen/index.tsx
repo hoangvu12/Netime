@@ -45,7 +45,7 @@ const SearchScreen = () => {
   const list = data?.pages.map((list) => list.data).flat();
 
   return (
-    <div className="w-full">
+    <div className="px-8 py-20 lg:px-20 lg:py-24 w-full">
       <div className="w-full p-2">
         <div className="flex items-center justify-between">
           <p className="text-white font-medum text-4xl">
