@@ -20,7 +20,7 @@ module.exports = {
         ti: ["0.5rem", "0.75rem"],
       },
       minHeight: {
-        8: "8rem",
+        4: "4rem",
       },
       maxHeight: {
         60: "15rem",

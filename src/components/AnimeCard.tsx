@@ -21,12 +21,6 @@ const AnimeCard = (props: AnimeCardProps) => {
           )}
         />
 
-        {props.upcoming && (
-          <div className="absolute inset-0 bg-black bg-opacity-60 flex items-center justify-center">
-            <p className="text-white font-medium text-xl">Sắp chiếu</p>
-          </div>
-        )}
-
         <div className="absolute inset-0 invisible group-hover:visible bg-black bg-opacity-60 flex items-center justify-center">
           <AiFillPlayCircle size={50} className="text-white" />
         </div>
@@ -37,15 +31,11 @@ const AnimeCard = (props: AnimeCardProps) => {
       </div>
       <div
         className={classNames(
-          "bg-background-darker p-3 w-full space-y-2 rounded-b-md min-h-8"
+          "bg-background-darker p-3 w-full space-y-2 rounded-b-md min-h-4"
         )}
       >
         <p className="uppercase text-white font-medium text-sm line-clamp-2">
           {props.name}
-        </p>
-
-        <p className="text-gray-400 text-xs line-clamp-3">
-          {props.description}
         </p>
       </div>
     </Link>

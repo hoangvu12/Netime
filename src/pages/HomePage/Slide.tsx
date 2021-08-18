@@ -1,5 +1,4 @@
 import React from "react";
-import { AiOutlineUnorderedList } from "react-icons/ai";
 import { BiTime } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import Image from "../../components/Image";
@@ -20,25 +19,14 @@ const Slide = (props: Anime) => {
               <TextIcon
                 icon={BiTime}
                 iconClassName="text-gray-400 mr-1"
-                text={props.time!}
-                textClassName="text-white text-sm"
-              />
-            </div>
-
-            <div>
-              <TextIcon
-                icon={AiOutlineUnorderedList}
-                iconClassName="text-primary mr-1"
-                text={`Thể loại: ${props.genres
-                  ?.map(({ name }) => name)
-                  .join(", ")}`}
+                text={props.views.toString()!}
                 textClassName="text-white text-sm"
               />
             </div>
           </div>
         </div>
         <Image
-          src={props.backgroundImage!}
+          src={props.thumbnail!}
           alt={props.name}
           className="rounded-md w-full h-full object-cover"
         />

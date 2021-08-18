@@ -48,27 +48,25 @@ export interface AnimeInfo {
   slug: string;
   thumbnail: string;
   views: number;
-  is_movie: false;
-  time: string;
   genres: Genre[];
+  likes: number;
+  follows: number;
   subTeams: string[];
   description: string;
   episodes: Episode[];
 }
 
 export interface Anime {
-  backgroundImage?: string;
   id: number;
   name: string;
   thumbnail: string;
-  is_movie: boolean;
   time: string;
-  description: string;
-  genres?: Genre[];
-  subTeams?: string[];
   slug: string;
   views: number;
-  upcoming?: boolean;
+  latestEpisode?: {
+    name: string;
+    views: number;
+  };
 }
 
 export interface Genre {

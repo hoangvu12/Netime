@@ -70,9 +70,6 @@ const InfoScreen = () => {
 
               <div>
                 <h1 className="text-sm line-clamp-1">
-                  Thời lượng: {info?.time}
-                </h1>
-                <h1 className="text-sm line-clamp-1">
                   Nhóm sub: {info?.subTeams.join(", ")}
                 </h1>
                 <h1 className="text-sm line-clamp-1">
