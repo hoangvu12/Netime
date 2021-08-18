@@ -1,5 +1,5 @@
-// export const API_URL = "https://netime.glitch.me/api/v1";
-export const API_URL = "http://localhost:3000/api/v1";
+export const API_URL = "https://netime.glitch.me/api/v1";
+// export const API_URL = "http://localhost:3000/api/v1";
 export const GITHUB_URL = "https://github.com/hoangvu12/Netime";
 export const FACEBOOK_URL = "https://www.facebook.com/nguyenvuzxc1/";
 export const DISCORD_NAME = "VuNguyen#5055";
