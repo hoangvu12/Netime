@@ -1,7 +1,6 @@
-import { GENRES, SEASONS, TYPES } from "./constants";
+import { GENRES, RANKINGS } from "./constants";
+import { Genre, Ranking, Route } from "./types";
 import lazyLoading from "./utils/lazyLoading";
-
-import { Genre, Route, Season, Type } from "./types";
 
 const HomeScreen = lazyLoading(() => import("./pages/HomePage"));
 const BrowseScreen = lazyLoading(() => import("./pages/BrowseScreen"));
@@ -17,17 +16,6 @@ const routes: Route[] = [
     header: true,
     dropdown: false,
   },
-
-  {
-    name: "Định dạng",
-    path: "/types/:slug",
-    component: BrowseScreen,
-    header: true,
-    dropdown: true,
-    dropdownData: TYPES,
-    dropdownPath: (data: Type) => `/types/${data.slug}`,
-    listKey: (data: Type) => data.slug,
-  },
   {
     name: "Thể loại",
     path: "/genres/:slug",
@@ -39,14 +27,14 @@ const routes: Route[] = [
     listKey: (data: Genre) => data.slug,
   },
   {
-    name: "Mùa",
-    path: "/seasons/:season/:year",
+    name: "Top Anime",
+    path: "/ranking/:slug",
     component: BrowseScreen,
     header: true,
     dropdown: true,
-    dropdownData: SEASONS,
-    dropdownPath: (data: Season) => `/seasons/${data.season}/${data.year}`,
-    listKey: (data: Season) => `${data.season}/${data.year}`,
+    dropdownData: RANKINGS,
+    dropdownPath: (data: Ranking) => `/ranking/${data.slug}`,
+    listKey: (data: Ranking) => data.slug,
   },
   {
     name: "Thông tin phim",

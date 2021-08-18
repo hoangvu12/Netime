@@ -1,4 +1,4 @@
-export const API_URL = "https://5e8ae3466c96.au.ngrok.io/api/v1";
+export const API_URL = "https://netime.glitch.me/api/v1";
 export const GITHUB_URL = "https://github.com/hoangvu12/Netime";
 export const FACEBOOK_URL = "https://www.facebook.com/nguyenvuzxc1/";
 export const DISCORD_NAME = "VuNguyen#5055";
@@ -12,50 +12,42 @@ export const TYPES = [
 ];
 
 export const GENRES = [
-  { name: "Action", slug: "hanh-dong" },
-  { name: "Adventure", slug: "phieu-luu" },
-  { name: "Cartoon", slug: "cartoon" },
-  { name: "Comedy", slug: "hai-huoc" },
-  { name: "Dementia", slug: "dien-loan" },
-  { name: "Demons", slug: "demons" },
-  { name: "Drama", slug: "drama" },
-  { name: "Ecchi", slug: "ecchi" },
-  { name: "Fantasy", slug: "phep-thuat" },
-  { name: "Game", slug: "tro-choi" },
-  { name: "Harem", slug: "harem" },
-  { name: "Historical", slug: "lich-su" },
-  { name: "Horror", slug: "kinh-di" },
-  { name: "Josei", slug: "josei" },
-  { name: "Kids", slug: "tre-em" },
-  { name: "Live Action", slug: "live-action" },
-  { name: "Magic", slug: "ma-thuat" },
-  { name: "Martial Arts", slug: "martial-arts" },
-  { name: "Mecha", slug: "mecha" },
-  { name: "Military", slug: "quan-doi" },
-  { name: "Music", slug: "am-nhac" },
-  { name: "Mystery", slug: "mystery" },
-  { name: "Parody", slug: "parody" },
-  { name: "Police", slug: "police" },
-  { name: "Psychological", slug: "psychological" },
-  { name: "Romance", slug: "tinh-cam" },
-  { name: "Samurai", slug: "samurai" },
-  { name: "School", slug: "truong-hoc" },
-  { name: "Sci-Fi", slug: "sci-fi" },
-  { name: "Seinen", slug: "seinen" },
-  { name: "Shoujo", slug: "shoujo" },
-  { name: "Shoujo Ai", slug: "shoujo-ai" },
-  { name: "Shounen", slug: "shounen" },
-  { name: "Shounen Ai", slug: "shounen-ai" },
-  { name: "Slice of Life", slug: "doi-thuong" },
-  { name: "Space", slug: "space" },
-  { name: "Sports", slug: "the-thao" },
-  { name: "Super Power", slug: "super-power" },
-  { name: "Supernatural", slug: "sieu-nhien" },
-  { name: "Thriller", slug: "thriller" },
-  { name: "Tokusatsu", slug: "tokusatsu" },
-  { name: "Vampire", slug: "vampire" },
-  { name: "Yaoi", slug: "yaoi" },
-  { name: "Yuri", slug: "yuri" },
+  { slug: "hanh-dong", name: "Hành Động" },
+  { slug: "vien-tuong", name: "Viễn Tưởng" },
+  { slug: "lang-man", name: "Lãng Mạn" },
+  { slug: "kinh-di", name: "Kinh Dị" },
+  { slug: "vo-thuat", name: "Võ Thuật" },
+  { slug: "hai-huoc", name: "Hài Hước" },
+  { slug: "truong-hoc", name: "Trường Học" },
+  { slug: "trinh-tham", name: "Trinh Thám" },
+  { slug: "am-nhac", name: "Âm Nhạc" },
+  { slug: "phieu-luu", name: "Phiêu Lưu" },
+  { slug: "sieu-nhien", name: "Siêu Nhiên" },
+  { slug: "doi-thuong", name: "Đời Thường" },
+  { slug: "gia-tuong", name: "Giả Tưởng" },
+  { slug: "robot", name: "Robot" },
+  { slug: "game", name: "Game" },
+  { slug: "the-thao", name: "Thể Thao" },
+  { slug: "kich-tinh", name: "Kịch Tính" },
+];
+
+export const RANKINGS = [
+  {
+    slug: "ngay",
+    name: "BXH ngày",
+  },
+  {
+    slug: "tuan",
+    name: "BXH tuần",
+  },
+  {
+    slug: "thang",
+    name: "BXH tháng",
+  },
+  {
+    slug: "nam",
+    name: "BXH năm",
+  },
 ];
 
 export const SEASONS = [

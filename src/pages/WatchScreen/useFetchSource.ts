@@ -3,13 +3,13 @@ import { getSource } from "../../services/anime";
 import { Source } from "../../types";
 
 const useFetchSource = (
-  hash: string | undefined,
-  id: number | undefined,
+  animeId: number,
+  episodeIndex: number,
   enabled?: boolean
 ) => {
   return useQuery<Source>(
-    ["source", { hash, id }],
-    () => getSource(hash!, id!),
+    ["source", { animeId, episodeIndex }],
+    () => getSource(animeId, episodeIndex),
     { enabled }
   );
 };

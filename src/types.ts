@@ -15,14 +15,24 @@ export interface Icon {
 }
 
 export interface Episode {
-  hash: string;
   id: number;
-  name: string;
+  name: number;
+  special_name: number;
+  detail_name: string | null;
+  full_name: string;
+  film_name: string;
+  slug: string;
+  link: string;
+  views: number;
+  is_copyrighted: boolean | null;
+  has_preview: boolean | null;
+  thumbnail_small: string;
+  thumbnail_medium: string;
+  upcoming: boolean | null;
 }
 
-export interface Source {
-  source: string;
-  type: string;
+export interface Source extends Episode {
+  videoSource: string;
 }
 
 export interface AnimeWatchInfo {
@@ -33,44 +43,32 @@ export interface AnimeWatchInfo {
 }
 
 export interface AnimeInfo {
-  backgroundImage: string;
-  title: string;
-  altTitle: string;
-  image: string;
-  description: string;
+  id: number;
+  name: string;
+  slug: string;
+  thumbnail: string;
+  views: number;
+  is_movie: false;
   time: string;
-  date: string;
-  views: string;
-  status?: string;
-  showtime?: string;
-  followers?: string;
-  quality: string;
-  rating?: string;
-  language?: string;
-  studio?: string;
   genres: Genre[];
-  seasons: Season[];
-  directors?: Director[];
-  nations?: Nation[];
-  relatedAnime: Anime[];
+  subTeams: string[];
+  description: string;
+  episodes: Episode[];
 }
 
 export interface Anime {
-  stars: number;
-  image: string;
-  title: string;
+  backgroundImage?: string;
+  id: number;
+  name: string;
+  thumbnail: string;
+  is_movie: boolean;
+  time: string;
+  description: string;
+  genres?: Genre[];
+  subTeams?: string[];
   slug: string;
-  views?: number | null;
-  isCompleted?: boolean;
-  isUpcoming?: boolean;
-  upcomingYear?: string | null;
-  totalEpisodes?: number | null;
-  quality?: string;
-  date?: string;
-  time?: string;
-  description?: string;
-  studio?: string;
-  genres?: Genre[] | null;
+  views: number;
+  upcoming?: boolean;
 }
 
 export interface Genre {
@@ -78,28 +76,12 @@ export interface Genre {
   slug: string;
 }
 
+export interface Ranking {
+  name: string;
+  slug: string;
+}
+
 export interface Sort {
-  name: string;
-  slug: string;
-}
-
-export interface Season {
-  name: string;
-  season: string;
-  year: string;
-}
-
-export interface Type {
-  name: string;
-  slug: string;
-}
-
-export interface Nation {
-  name: string;
-  slug: string;
-}
-
-export interface Director {
   name: string;
   slug: string;
 }

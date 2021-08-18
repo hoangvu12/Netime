@@ -3,7 +3,7 @@ import { Img, ImgProps } from "react-image";
 import classNames from "classnames";
 import Skeleton from "./Skeleton";
 
-const allowedTexts = ["w-", "h-"];
+const allowedTexts = ["w-", "h-", "mr-", "ml", "my", "mx", "px", "py"];
 
 const isAllowedText = (text: string) =>
   allowedTexts.find((allowedText) => text.includes(allowedText));

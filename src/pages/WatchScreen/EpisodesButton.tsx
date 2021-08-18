@@ -1,10 +1,11 @@
-import React, { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
+import React, { Fragment } from "react";
 import { ImStack } from "react-icons/im";
-import classNames from "classnames";
+import Episode from "../../components/Episode";
+import { Episode as EpisodeType } from "../../types";
 
 interface EpisodesButtonProps {
-  episodes: string[];
+  episodes: EpisodeType[];
   onClick?: (
     episode: EpisodesButtonProps["episodes"][number],
     index: number
@@ -27,25 +28,16 @@ const EpisodesButton = (props: EpisodesButtonProps) => {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="no-tap-highlight rounded-md text-white overflow-y-scroll absolute space-y-2 right-0 bottom-full p-6 h-60 w-56 mt-2 origin-top-right bg-background shadow-lg focus:outline-none">
+        <Menu.Items className="no-tap-highlight rounded-md text-white overflow-y-scroll absolute space-y-2 right-0 bottom-full p-6 h-96 w-32rem mt-2 origin-top-right bg-background shadow-lg focus:outline-none">
           <h1 className="text-white font-medium">Tập phim</h1>
           <div className="w-full space-y-2">
             {props.episodes.map((episode, index) => (
-              <Menu.Item
-                key={index}
-                as="button"
-                className={classNames(
-                  "no-tap-highlight p-3 block min-w-full rounded-md m-1 hover:bg-opacity-80 line-clamp-5",
-                  index === props.activeIndex
-                    ? "bg-primary text-white"
-                    : "bg-background-lighter"
-                )}
-                onClick={() => {
-                  props?.onClick?.(episode, index);
-                }}
-              >
-                {episode}
-              </Menu.Item>
+              <Episode
+                {...episode}
+                key={episode.slug}
+                active={props.activeIndex === index}
+                onClick={() => props.onClick?.(episode, index)}
+              />
             ))}
           </div>
         </Menu.Items>

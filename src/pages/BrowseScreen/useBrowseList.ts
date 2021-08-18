@@ -4,7 +4,6 @@ import { getList } from "../../services/anime";
 interface Props {
   category: string;
   slug: string;
-  sort: string;
 }
 
 const useBrowseList = (props: Props) => {
@@ -12,10 +11,17 @@ const useBrowseList = (props: Props) => {
     getList({ ...props, page: pageParam });
 
   return useInfiniteQuery(["browse", props], fetchList, {
-    getNextPageParam: ({ pagination }) =>
-      pagination.currentPage >= pagination.totalPage
+    getNextPageParam: (response) => {
+      if (!response.pagination) {
+        return;
+      }
+
+      const { pagination } = response;
+
+      return pagination.currentPage >= pagination.totalPage
         ? null
-        : pagination.currentPage + 1,
+        : pagination.currentPage + 1;
+    },
   });
 };
 

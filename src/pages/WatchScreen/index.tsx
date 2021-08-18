@@ -1,6 +1,5 @@
 import classNames from "classnames";
-import { SourceInfo } from "plyr";
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FaPlay } from "react-icons/fa";
 import { HiArrowNarrowLeft } from "react-icons/hi";
 import { useNavigate, useParams } from "react-router";
@@ -10,9 +9,10 @@ import Loader from "../../components/Loader";
 import useDevice from "../../hooks/useDevice";
 import useOrientation from "../../hooks/useOrientiation";
 import useQueryParams from "../../hooks/useQueryParams";
+import { Episode } from "../../types";
+import useFetchInfo from "../InfoScreen/useFetchInfo";
 import EpisodesButton from "./EpisodesButton";
 import useFetchSource from "./useFetchSource";
-import useFetchWatchInfo from "./useFetchWatchInfo";
 import Video, { addButtons, PlyrInstance } from "./Video";
 import "./Video.css";
 
@@ -31,36 +31,16 @@ const WatchScreen = () => {
   );
   const debounce = useRef<NodeJS.Timeout | null>(null);
 
-  const { data: info, isLoading: isInfoLoading } = useFetchWatchInfo(slug);
-
-  const currentEpisode = info?.episodes[episodeIndex];
+  const { data: info, isLoading: isInfoLoading } = useFetchInfo(slug);
 
   const { data: source, isLoading: isSourceLoading } = useFetchSource(
-    currentEpisode?.hash,
-    currentEpisode?.id,
+    info?.id!,
+    episodeIndex,
     !!info
   );
 
-  const videoSource = useMemo<SourceInfo>(
-    () => ({
-      type: "video",
-      sources: [
-        {
-          src: source?.source!,
-        },
-      ],
-    }),
-    [source]
-  );
-
-  const handleEpisodeClick = (_episode: string, i: number) => {
-    // if (
-    //   window.screen.width === window.innerWidth &&
-    //   window.screen.height === window.innerHeight
-    // ) {
-    //   document.documentElement.requestFullscreen();
-    // }
-
+  const handleEpisodeClick = (_episode: Episode, i: number) => {
+    navigate(`/watch/${slug}?episode_index=${i}`, { replace: true });
     setEpisodeIndex(i);
   };
 
@@ -94,7 +74,7 @@ const WatchScreen = () => {
       {
         component: (
           <EpisodesButton
-            episodes={info?.episodes.map((episode) => episode.name)!}
+            episodes={info?.episodes!}
             onClick={handleEpisodeClick}
             activeIndex={episodeIndex}
           />
@@ -156,7 +136,14 @@ const WatchScreen = () => {
     <div className="absolute bg-background inset-0 w-screen h-screen z-50">
       <div className="relative w-full h-full">
         <Video
-          source={videoSource}
+          source={{
+            type: "video",
+            sources: [
+              {
+                src: source?.videoSource!,
+              },
+            ],
+          }}
           onReady={handleReady}
           onSourceChange={handleSourceChange}
         />
@@ -220,8 +207,10 @@ const WatchScreen = () => {
         >
           <div className="space-y-2">
             <h1 className="text-gray-400 font-medium text-lg">Bạn đang xem</h1>
-            <h1 className="text-white font-bold text-5xl">{info?.title}</h1>
-            <h1 className="text-white font-bold text-2xl">Tập 1</h1>
+            <h1 className="text-white font-bold text-5xl">{info?.name}</h1>
+            <h1 className="text-white font-bold text-2xl">
+              {source?.full_name}
+            </h1>
           </div>
 
           <h1 className="text-gray-500 text-base font-medium line-clamp-3">

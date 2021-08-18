@@ -14,12 +14,13 @@ module.exports = {
       },
       spacing: {
         in: "inherit",
+        "32rem": "32rem",
       },
       fontSize: {
         ti: ["0.5rem", "0.75rem"],
       },
       minHeight: {
-        11: "11rem",
+        8: "8rem",
       },
       maxHeight: {
         60: "15rem",
@@ -29,6 +30,7 @@ module.exports = {
       },
       maxWidth: {
         "1/4": "25%",
+        36: "9rem",
       },
     },
   },

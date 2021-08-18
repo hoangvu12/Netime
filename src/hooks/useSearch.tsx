@@ -3,7 +3,7 @@ import { search } from "../services/anime";
 
 const useSearch = ({
   keyword,
-  limit = 30,
+  limit = 24,
   enabled = true,
 }: {
   keyword: string;
@@ -12,9 +12,9 @@ const useSearch = ({
   sort?: string;
 }) => {
   const fetchList = ({ pageParam = 1 }) =>
-    search({ keyword, page: pageParam, limit });
+    search({ q: keyword, page: pageParam, limit });
 
-  return useInfiniteQuery(["search", { limit }], fetchList, {
+  return useInfiniteQuery(["search", { limit, keyword }], fetchList, {
     enabled,
     getNextPageParam: ({ pagination }) =>
       pagination.currentPage >= pagination.totalPage

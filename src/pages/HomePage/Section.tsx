@@ -7,12 +7,12 @@ import useFetchList from "../../hooks/useFetchList";
 interface SectionProps {
   title: string;
   category: string;
-  slug: string;
+  slug?: string;
   to?: To;
 }
 
 const Section = (props: SectionProps) => {
-  const { title, to, category, slug } = props;
+  const { title, to, category, slug = "" } = props;
 
   const { data, isLoading } = useFetchList(category, slug);
 

@@ -41,7 +41,7 @@ export const getList = async ({
 };
 
 interface SearchProps {
-  keyword: string;
+  q: string;
   limit: number;
   page: number;
 }
@@ -55,7 +55,7 @@ export const search = async (props: SearchProps): Promise<GetListResponse> => {
 };
 
 export const getInfo = async (slug: string): Promise<AnimeInfo> => {
-  const { data } = await instance.get(`/info/${slug}`);
+  const { data } = await instance.get(`/anime/${slug}`);
 
   return data.data;
 };
@@ -66,8 +66,13 @@ export const getWatchInfo = async (slug: string): Promise<AnimeWatchInfo> => {
   return data.data;
 };
 
-export const getSource = async (hash: string, id: number): Promise<Source> => {
-  const { data } = await instance.get("/source", { params: { hash, id } });
+export const getSource = async (
+  animeId: number,
+  episodeIndex: number
+): Promise<Source> => {
+  const { data } = await instance.get(
+    `/anime/${animeId}/episodes/${episodeIndex}`
+  );
 
   return data.data;
 };

@@ -1,6 +1,6 @@
 /* eslint-disable react/self-closing-comp */
 import classNames from "classnames";
-import Hls, { HlsConfig } from "hls.js";
+import Hls from "hls.js";
 import PlyrJS, { Options, PlyrEvent as PlyrJSEvent, SourceInfo } from "plyr";
 import "plyr/dist/plyr.css";
 import PropTypes from "prop-types";
@@ -12,7 +12,6 @@ import React, {
   useState,
 } from "react";
 import ReactDOM from "react-dom";
-import { API_URL } from "../../constants";
 
 export type PlyrInstance = PlyrJS;
 export type PlyrEvent = PlyrJSEvent;
@@ -33,12 +32,12 @@ export interface HTMLPlyrVideoElement {
 
 let isListening = false;
 
-const hlsConfig: Partial<HlsConfig> = {
-  xhrSetup: (xhr, url) => {
-    url = `${API_URL}/cors/${url}`;
-    xhr.open("GET", url, true);
-  },
-};
+// const hlsConfig: Partial<HlsConfig> = {
+//   xhrSetup: (xhr, url) => {
+//     url = `${API_URL}/cors/${url}`;
+//     xhr.open("GET", url, true);
+//   },
+// };
 
 const Plyr: React.FC<PlyrProps> = (props) => {
   const { options = null, source, onReady, onSourceChange, ...rest } = props;
@@ -46,7 +45,7 @@ const Plyr: React.FC<PlyrProps> = (props) => {
   const [player, setPlayer] = useState<PlyrInstance | undefined>();
 
   const innerRef = useRef<HTMLPlyrVideoElement>();
-  const hls = useRef(new Hls(hlsConfig));
+  const hls = useRef(new Hls());
 
   const videoOptions: PlyrJS.Options = {
     ...options,

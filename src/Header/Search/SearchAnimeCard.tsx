@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Image from "../../components/Image";
 import { Anime } from "../../types";
+import { numberWithCommas } from "../../utils";
 
 const SearchAnimeCard = (anime: Anime) => {
   return (
@@ -11,17 +12,18 @@ const SearchAnimeCard = (anime: Anime) => {
         key={anime.slug}
       >
         <Image
-          src={anime.image}
-          alt={anime.title}
+          src={anime.thumbnail}
+          alt={anime.name}
           className="min-w-1/4 w-1/4 max-w-1/4 object-cover h-20 mr-2"
         />
 
         <div className="space-y-2">
-          <h1 className="text-white text-sm font-medium line-clamp-1">
-            {anime.title}
+          <h1 className="text-white text-sm font-medium line-clamp-2">
+            {anime.name}
           </h1>
+          <p className="text-gray-400 line-clamp-2 text-xs">{anime.time}</p>
           <p className="text-gray-400 line-clamp-2 text-xs">
-            {anime.description}
+            {numberWithCommas(anime.views)} lượt xem
           </p>
         </div>
       </div>
