@@ -1,5 +1,8 @@
 module.exports = {
-  purge: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
+  purge: {
+    content: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
+    safelist: ["w-1/5", "w-1/4", "w-1/3", "w-1/2"],
+  },
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
@@ -31,6 +34,7 @@ module.exports = {
       maxWidth: {
         "1/4": "25%",
         36: "9rem",
+        24: "6rem",
       },
     },
   },

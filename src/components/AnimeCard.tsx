@@ -25,8 +25,10 @@ const AnimeCard = (props: AnimeCardProps) => {
           <AiFillPlayCircle size={50} className="text-white" />
         </div>
 
-        <div className="absolute top-2 left-2 bg-black px-2 py-1 rounded-md text-white text-xs bg-opacity-80">
-          {props.time}
+        <div className="px-2 py-1 absolute top-2 left-2 max-w-24 bg-black rounded-md bg-opacity-80">
+          <p className="text-white text-xs line-clamp-1">
+            {props.time || props.latestEpisode?.name}
+          </p>
         </div>
       </div>
       <div
