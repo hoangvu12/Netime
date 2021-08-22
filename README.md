@@ -14,12 +14,11 @@ Netime is a website to watch anime with vietnamese subtitle, built with React an
 
 - Front-end:
   - [React](https://github.com/facebook/react), [Tailwind](https://github.com/tailwindlabs/tailwindcss)
+    , Typescript
   - Libraries: [React Query](https://github.com/tannerlinsley/react-query), [React Slick](https://github.com/akiran/react-slick), [Plyr](https://github.com/sampotts/plyr)
 - Back-end:
   - [Nodejs](https://github.com/nodejs), [Express](https://github.com/expressjs/express)
-  - Libraries: [Cheerio](https://github.com/cheeriojs/cheerio)
-
-#### Note: Both of them using Typescript
+  - Libraries: <s>[Cheerio](https://github.com/cheeriojs/cheerio)</s> [JSDom](https://github.com/jsdom/jsdom)
 
 ##### Server github repo: [Netime-server](https://github.com/hoangvu12/Netime-server)
 
@@ -38,29 +37,31 @@ Change API_URL in `src/constants.ts` to let the project works properly
 
 Here is some screenshots to show how the website would looks like.
 
-![homescreen](https://user-images.githubusercontent.com/68330291/129450435-384fcb5e-490b-48b8-92a2-4679b98ea13d.png)
+![homescreen](https://i.ibb.co/zxJggGg/netime-vercel-app-3.png)
 ![watchscreen](https://user-images.githubusercontent.com/68330291/129450531-003515cb-49cc-4007-9bc0-ef36ddef2243.png)
 
 Or here is [live example](https://netime.vercel.app)
 
 ## Todo
 
-- <s>Guide tour in watch screen.</s> ❌
+- <s>Guide tour in watch screen.</s> ❌ Reason: it breaks my styles.
 - <s>Footer</s> ✔️
 - <s>Skeleton loading</s> ✔️
-- More compatible with mobile devices
-- Meta Tags
-- Save user's episodes. (Maybe using localStorage, or a database if I have time.)
-- Comments
 - <s>Restyle InfoScreen</s> ✔️
+- <s>More compatible with mobile devices</s>
+- Video player overlay. (Skip episode, etc...)
+- Video controls on mobile
+- Meta Tags (Maybe can't with React....)
+- Save user's episodes. (Maybe using localStorage)
+- Comments
 
 #### Maybe
 
 - A domain
-- Comics section to read.
-- Authorization system (If I have enough time.)
+- <s>Comics section to read</s> ❌ Reason: This is anime website.
+- <s>Authorization system (If I have enough time.)</s> ❌ Reason: I don't have time
 
 ## Sources
 
 - Video player design is inspired by Netflix (Sadly I can't make the same as them)
-- Data from [AnimeVSub](https://animevietsub.tv)
+- Data from <s>[AnimeVSub](https://animevietsub.tv)</s> [Vuighe](https://vuighe.com)
