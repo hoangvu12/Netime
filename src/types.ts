@@ -35,13 +35,6 @@ export interface Source extends Episode {
   videoSource: string;
 }
 
-export interface AnimeWatchInfo {
-  id: number;
-  episodes: Episode[];
-  title: string;
-  description: string;
-}
-
 export interface AnimeInfo {
   id: number;
   name: string;

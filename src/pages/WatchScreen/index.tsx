@@ -10,6 +10,7 @@ import useDevice from "../../hooks/useDevice";
 import useOrientation from "../../hooks/useOrientiation";
 import useQueryParams from "../../hooks/useQueryParams";
 import { Episode } from "../../types";
+import Storage from "../../utils/Storage";
 import useFetchInfo from "../InfoScreen/useFetchInfo";
 import EpisodesButton from "./EpisodesButton";
 import useFetchSource from "./useFetchSource";
@@ -70,6 +71,19 @@ const WatchScreen = () => {
   }, []);
 
   const handleSourceChange = () => {
+    const { episodes, thumbnail, ...rest } = info!;
+
+    Storage.update(
+      "recent",
+      { id: info?.id },
+      {
+        ...rest,
+        thumbnail: source?.thumbnail_medium,
+        episodeIndex,
+        time: episodes[episodeIndex].full_name,
+      }
+    );
+
     addButtons([
       {
         component: (

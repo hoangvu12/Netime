@@ -1,8 +1,14 @@
 import React from "react";
+import { Anime } from "../../types";
+import Storage from "../../utils/Storage";
 import Section from "./Section";
 import SlideCarousel from "./SlideCarousel";
 
 const sections = [
+  {
+    title: "Xem gần đây",
+    data: Storage.find<Anime>("recent"),
+  },
   {
     title: "Mới cập nhật",
     category: "recently",
@@ -26,8 +32,8 @@ const HomePage = () => {
       </div>
 
       <div className="space-y-6">
-        {sections.map((section) => (
-          <Section {...section} key={section.slug} />
+        {sections.map((section, i) => (
+          <Section {...section} key={i} />
         ))}
       </div>
     </div>

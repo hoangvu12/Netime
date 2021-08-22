@@ -1,6 +1,6 @@
 import axios from "axios";
 import { API_URL } from "../constants";
-import { Anime, AnimeInfo, AnimeWatchInfo, Source } from "../types";
+import { Anime, AnimeInfo, Source } from "../types";
 
 const instance = axios.create({
   baseURL: API_URL,
@@ -56,12 +56,6 @@ export const search = async (props: SearchProps): Promise<GetListResponse> => {
 
 export const getInfo = async (slug: string): Promise<AnimeInfo> => {
   const { data } = await instance.get(`/anime/${slug}`);
-
-  return data.data;
-};
-
-export const getWatchInfo = async (slug: string): Promise<AnimeWatchInfo> => {
-  const { data } = await instance.get(`/watch/${slug}`);
 
   return data.data;
 };
