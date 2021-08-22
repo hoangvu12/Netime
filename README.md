@@ -49,10 +49,10 @@ Or here is [live example](https://netime.vercel.app)
 - <s>Skeleton loading</s> ✔️
 - <s>Restyle InfoScreen</s> ✔️
 - <s>More compatible with mobile devices</s>
+- <s>Save user's episodes.</s> ✔️
 - Video player overlay. (Skip episode, etc...)
 - Video controls on mobile
 - Meta Tags (Maybe can't with React....)
-- Save user's episodes. (Maybe using localStorage)
 - Comments
 
 #### Maybe
