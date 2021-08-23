@@ -1,6 +1,5 @@
 import classNames from "classnames";
 import React, { useEffect, useRef, useState } from "react";
-import { FaPlay } from "react-icons/fa";
 import { HiArrowNarrowLeft } from "react-icons/hi";
 import { useNavigate, useParams } from "react-router";
 import Button from "../../components/Button";
@@ -24,7 +23,6 @@ const WatchScreen = () => {
   const { isDesktop } = useDevice();
   const { isPortrait } = useOrientation();
 
-  const [showNextEpButton, setShowNextEpButton] = useState(false);
   const [showPauseScreen, setShowPauseScreen] = useState(false);
   const [showOrientationScreen, setShowOrientationScreen] = useState(false);
   const [episodeIndex, setEpisodeIndex] = useState(
@@ -43,10 +41,6 @@ const WatchScreen = () => {
   const handleEpisodeClick = (_episode: Episode, i: number) => {
     navigate(`/watch/${slug}?episode_index=${i}`, { replace: true });
     setEpisodeIndex(i);
-  };
-
-  const handleNextEpisodeClick = () => {
-    setEpisodeIndex((i) => i + 1);
   };
 
   useEffect(() => {
@@ -101,17 +95,6 @@ const WatchScreen = () => {
   };
 
   const handleReady = (player: PlyrInstance) => {
-    player.on("timeupdate", () => {
-      const remainingTime = Math.round(player.duration - player.currentTime);
-      const triggerTime = 120; // Seconds
-
-      if (remainingTime <= triggerTime) {
-        setShowNextEpButton(true);
-      } else {
-        setShowNextEpButton(false);
-      }
-    });
-
     if (isDesktop) {
       document.addEventListener("visibilitychange", () => {
         if (debounce.current) {
@@ -167,21 +150,6 @@ const WatchScreen = () => {
               className="text-gray-300 hover:text-white cursor-pointer"
               onClick={() => navigate(-1)}
             />
-          </div>
-
-          <div
-            className={classNames(
-              "absolute bottom-20 right-10",
-              !showNextEpButton ? "hidden" : "block"
-            )}
-          >
-            <Button
-              onClick={handleNextEpisodeClick}
-              startIcon={FaPlay}
-              className="shadow-lg bg-white text-black"
-            >
-              Tập tiếp theo
-            </Button>
           </div>
         </Video>
 
