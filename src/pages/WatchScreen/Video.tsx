@@ -7,6 +7,7 @@ import PropTypes from "prop-types";
 import React, {
   HTMLProps,
   MutableRefObject,
+  PropsWithChildren,
   useEffect,
   useRef,
   useState,
@@ -32,15 +33,15 @@ export interface HTMLPlyrVideoElement {
 
 let isListening = false;
 
-// const hlsConfig: Partial<HlsConfig> = {
-//   xhrSetup: (xhr, url) => {
-//     url = `${API_URL}/cors/${url}`;
-//     xhr.open("GET", url, true);
-//   },
-// };
-
-const Plyr: React.FC<PlyrProps> = (props) => {
-  const { options = null, source, onReady, onSourceChange, ...rest } = props;
+const Plyr: React.FC<PropsWithChildren<PlyrProps>> = (props) => {
+  const {
+    options = null,
+    source,
+    onReady,
+    onSourceChange,
+    children,
+    ...rest
+  } = props;
   const videoSource = source?.sources[0].src!;
   const [player, setPlayer] = useState<PlyrInstance | undefined>();
 
@@ -71,6 +72,8 @@ const Plyr: React.FC<PlyrProps> = (props) => {
       plyrPlayer.on("enterfullscreen", () => {
         window.screen.orientation.lock("landscape");
       });
+
+      renderOverlay(children);
     });
   };
 
@@ -130,6 +133,18 @@ const Plyr: React.FC<PlyrProps> = (props) => {
 export const addButtons = (buttons: Button[]) => {
   buttons.forEach((button) => {
     addButton(button);
+  });
+};
+
+const renderOverlay = (component: React.ReactNode) => {
+  const wrapper = document.querySelector(".plyr--video");
+
+  React.Children.forEach(component, (child) => {
+    const div = document.createElement("div");
+    div.style.zIndex = "1";
+    wrapper?.appendChild(div);
+
+    ReactDOM.render(<>{child}</>, div);
   });
 };
 

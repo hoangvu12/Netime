@@ -160,30 +160,30 @@ const WatchScreen = () => {
           }}
           onReady={handleReady}
           onSourceChange={handleSourceChange}
-        />
-
-        <div className="absolute top-8 left-8">
-          <HiArrowNarrowLeft
-            size={30}
-            className="text-gray-300 hover:text-white cursor-pointer"
-            onClick={() => navigate(-1)}
-          />
-        </div>
-
-        <div
-          className={classNames(
-            "absolute bottom-20 right-10",
-            !showNextEpButton ? "hidden" : "block"
-          )}
         >
-          <Button
-            onClick={handleNextEpisodeClick}
-            startIcon={FaPlay}
-            className="shadow-lg bg-white text-black"
+          <div className="absolute top-8 left-8">
+            <HiArrowNarrowLeft
+              size={30}
+              className="text-gray-300 hover:text-white cursor-pointer"
+              onClick={() => navigate(-1)}
+            />
+          </div>
+
+          <div
+            className={classNames(
+              "absolute bottom-20 right-10",
+              !showNextEpButton ? "hidden" : "block"
+            )}
           >
-            Tập tiếp theo
-          </Button>
-        </div>
+            <Button
+              onClick={handleNextEpisodeClick}
+              startIcon={FaPlay}
+              className="shadow-lg bg-white text-black"
+            >
+              Tập tiếp theo
+            </Button>
+          </div>
+        </Video>
 
         <div
           className={classNames(
