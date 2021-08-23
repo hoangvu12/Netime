@@ -144,7 +144,14 @@ const renderBackgroundOverlay = () => {
   const wrapper = document.querySelector(".plyr--video");
   const div = document.createElement("div");
   div.className =
-    "absolute left-0 top-0 h-56 w-full bg-gradient-to-b from-black via-transparent to-transparent";
+    "absolute left-0 top-0 h-56 w-full bg-gradient-to-b from-black via-transparent to-transparent transition duration-300";
+  const controls = document.querySelector(".plyr__controls")!;
+
+  controls.addEventListener("transitionstart", (e) => {
+    const opacity = getComputedStyle(controls).getPropertyValue("opacity");
+
+    div.style.opacity = Number(opacity) < 0.5 ? "1" : "0";
+  });
 
   wrapper?.appendChild(div);
 };
