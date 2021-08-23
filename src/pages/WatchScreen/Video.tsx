@@ -60,6 +60,10 @@ const Plyr: React.FC<PropsWithChildren<PlyrProps>> = (props) => {
     const plyrPlayer = new PlyrJS(".plyr-react", videoOptions);
     isListening = false;
 
+    if (!videoSource.includes("m3u8")) {
+      plyrPlayer.source = source!;
+    }
+
     plyrPlayer.on("ready", (event) => {
       setPlayer(plyrPlayer);
 
