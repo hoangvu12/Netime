@@ -136,6 +136,15 @@ export const addButtons = (buttons: Button[]) => {
   });
 };
 
+const renderBackgroundOverlay = () => {
+  const wrapper = document.querySelector(".plyr--video");
+  const div = document.createElement("div");
+  div.className =
+    "absolute left-0 top-0 h-32 w-full bg-gradient-to-b from-black via-transparent to-transparent";
+
+  wrapper?.appendChild(div);
+};
+
 const renderOverlay = (component: React.ReactNode) => {
   const wrapper = document.querySelector(".plyr--video");
 
@@ -146,6 +155,8 @@ const renderOverlay = (component: React.ReactNode) => {
 
     ReactDOM.render(<>{child}</>, div);
   });
+
+  renderBackgroundOverlay();
 };
 
 interface Button {
