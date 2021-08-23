@@ -49,7 +49,7 @@ const SearchScreen = () => {
   return (
     <div className="px-8 py-20 lg:px-20 lg:py-24 w-full">
       <div className="w-full p-2">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col space-y-2 md:flex-row md:space-y-0 items-center justify-between">
           <p className="text-white font-medum text-4xl">
             Kết quả tìm kiếm: <strong>{keyword}</strong>
           </p>
