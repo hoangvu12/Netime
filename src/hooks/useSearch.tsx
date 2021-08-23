@@ -15,7 +15,7 @@ const useSearch = ({
     search({ q: keyword, page: pageParam, limit });
 
   return useInfiniteQuery(["search", { limit, keyword }], fetchList, {
-    enabled,
+    enabled: !keyword ? false : enabled,
     getNextPageParam: ({ pagination }) =>
       pagination.currentPage >= pagination.totalPage
         ? null

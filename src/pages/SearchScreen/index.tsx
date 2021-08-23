@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import useInfiniteScroll from "react-infinite-scroll-hook";
 import { useNavigate } from "react-router";
 import AnimeCard from "../../components/AnimeCard";
@@ -13,8 +13,7 @@ const SearchScreen = () => {
   const query = useQueryParams();
   const navigate = useNavigate();
   const timeout = useRef<NodeJS.Timeout | null>(null);
-
-  const keyword = query.get("q");
+  const [keyword, setKeyword] = useState(query.get("q"));
 
   const {
     data,
@@ -23,7 +22,7 @@ const SearchScreen = () => {
     fetchNextPage,
     isFetchingNextPage,
     refetch,
-  } = useSearch({ keyword: keyword!, limit: 30 });
+  } = useSearch({ keyword: keyword!, limit: 30, enabled: false });
 
   const [sentryRef] = useInfiniteScroll({
     loading: isFetchingNextPage,
@@ -33,13 +32,16 @@ const SearchScreen = () => {
   });
 
   const handleKeywordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setKeyword(e.target.value);
+    navigate(`/search?q=${e.target.value}`, { replace: true });
+
     if (timeout.current) {
       clearTimeout(timeout.current);
     }
 
-    timeout.current = setTimeout(() => refetch(), 1000);
-
-    navigate(`/search?q=${e.target.value}`, { replace: true });
+    timeout.current = setTimeout(() => {
+      refetch();
+    }, 1000);
   };
 
   const list = data?.pages.map((list) => list.data).flat();
@@ -70,6 +72,12 @@ const SearchScreen = () => {
               />
             ))}
           </Skeleton>
+        )}
+
+        {!list?.length && (
+          <div className="my-12 flex items-center justify-center">
+            <p className="text-gray-300 text-lg text-center">Không có</p>
+          </div>
         )}
 
         <div className="my-12 flex flex-wrap">
