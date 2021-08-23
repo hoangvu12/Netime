@@ -48,10 +48,10 @@ class Storage {
     return parsedList.find((item) => compareTwoObject(item, filter));
   }
 
-  static find<T>(storageKey: string, filter = {}): T[] | undefined {
+  static find<T>(storageKey: string, filter = {}): T[] | [] {
     const rawList = localStorage.getItem(storageKey);
 
-    if (!rawList) return undefined;
+    if (!rawList) return [];
 
     const parsedList: T[] = JSON.parse(rawList);
 

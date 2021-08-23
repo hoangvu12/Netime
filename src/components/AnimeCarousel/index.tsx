@@ -80,18 +80,26 @@ const AnimeCarousel = (props: PropsWithChildren<AnimeCarouselProps>) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return !isLoading ? (
+  if (isLoading) {
+    return (
+      <Skeleton className="flex flex-wrap">
+        {new Array(slidesToShow).fill(null).map((_, i) => (
+          <AnimeCardSkeleton key={i} className={`w-1/${slidesToShow}`} />
+        ))}
+      </Skeleton>
+    );
+  }
+
+  return !data.length ? (
+    <div className="w-full h-full flex items-center justify-center">
+      <p className="text-gray-300 text-base ">Không có</p>
+    </div>
+  ) : (
     <Carousel settings={finalSettings}>
       {data.map((anime) => (
         <AnimeCard {...anime} key={anime.slug} />
       ))}
     </Carousel>
-  ) : (
-    <Skeleton className="flex flex-wrap">
-      {new Array(slidesToShow).fill(null).map((_, i) => (
-        <AnimeCardSkeleton key={i} className={`w-1/${slidesToShow}`} />
-      ))}
-    </Skeleton>
   );
 };
 

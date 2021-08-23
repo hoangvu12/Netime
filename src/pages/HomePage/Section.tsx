@@ -16,7 +16,7 @@ interface SectionProps {
 const Section = (props: SectionProps) => {
   const { title, to, category = "", slug = "", data: animeData } = props;
 
-  const { data, isLoading } = useFetchList(category, slug, !animeData);
+  const { data, isLoading } = useFetchList(category, slug, !!animeData?.length);
 
   return (
     <div className="mt-6">
