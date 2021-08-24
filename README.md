@@ -51,7 +51,7 @@ Or here is [live example](https://netime.vercel.app)
 - <s>More compatible with mobile devices</s>
 - <s>Save user's episodes.</s> ✔️
 - <s>Video player overlay.</s> ✔️
-- Video controls on mobile
+- <s>Video controls on mobile</s> ✔️
 - Meta Tags (Maybe can't with React....)
 - Comments
 
