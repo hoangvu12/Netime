@@ -14,13 +14,12 @@ import useFetchInfo from "../InfoScreen/useFetchInfo";
 import EpisodesButton from "./EpisodesButton";
 import useFetchSource from "./useFetchSource";
 import Video, { addButtons, PlyrInstance } from "./Video";
-import "./Video.css";
 
 const WatchScreen = () => {
   const { slug } = useParams();
   const query = useQueryParams();
   const navigate = useNavigate();
-  const { isDesktop } = useDevice();
+  const { isDesktop, isMobile } = useDevice();
   const { isPortrait } = useOrientation();
 
   const [showPauseScreen, setShowPauseScreen] = useState(false);
@@ -112,12 +111,6 @@ const WatchScreen = () => {
           timeoutSeconds * 1000
         );
       });
-
-      player.on("play", () => {
-        if (debounce.current) {
-          clearTimeout(debounce.current);
-        }
-      });
     }
   };
 
@@ -179,7 +172,7 @@ const WatchScreen = () => {
         <div
           className={classNames(
             "absolute inset-0 bg-black bg-opacity-90 px-40 flex flex-col space-y-6 justify-center",
-            !showPauseScreen ? "hidden" : "block"
+            !showPauseScreen || isMobile ? "hidden" : "block"
           )}
           onMouseEnter={() => {
             if (isDesktop && showPauseScreen) {

@@ -1,5 +1,4 @@
 /* eslint-disable react/self-closing-comp */
-import classNames from "classnames";
 import Hls from "hls.js";
 import PlyrJS, { Options, PlyrEvent as PlyrJSEvent, SourceInfo } from "plyr";
 import "plyr/dist/plyr.css";
@@ -12,7 +11,13 @@ import React, {
   useRef,
   useState,
 } from "react";
-import ReactDOM from "react-dom";
+import "./Video.css";
+import {
+  renderOverlayBackground,
+  renderOverlay,
+  renderOverlayControls,
+} from "./methods";
+export { addButtons } from "./methods";
 
 export type PlyrInstance = PlyrJS;
 export type PlyrEvent = PlyrJSEvent;
@@ -77,7 +82,9 @@ const Plyr: React.FC<PropsWithChildren<PlyrProps>> = (props) => {
         window.screen.orientation.lock("landscape");
       });
 
-      renderOverlay(children);
+      renderOverlay(plyrPlayer, children);
+      renderOverlayControls(plyrPlayer);
+      renderOverlayBackground(plyrPlayer);
     });
   };
 
@@ -132,78 +139,6 @@ const Plyr: React.FC<PropsWithChildren<PlyrProps>> = (props) => {
       {...rest}
     />
   );
-};
-
-export const addButtons = (buttons: Button[]) => {
-  buttons.forEach((button) => {
-    addButton(button);
-  });
-};
-
-const renderBackgroundOverlay = () => {
-  const wrapper = document.querySelector(".plyr--video");
-  const div = document.createElement("div");
-  div.className =
-    "absolute left-0 top-0 h-56 w-full bg-gradient-to-b from-black via-transparent to-transparent transition duration-300";
-  const controls = document.querySelector(".plyr__controls")!;
-
-  controls.addEventListener("transitionstart", (e) => {
-    const opacity = getComputedStyle(controls).getPropertyValue("opacity");
-
-    div.style.opacity = Number(opacity) < 0.5 ? "1" : "0";
-  });
-
-  wrapper?.appendChild(div);
-};
-
-const renderOverlay = (component: React.ReactNode) => {
-  const wrapper = document.querySelector(".plyr--video");
-
-  React.Children.forEach(component, (child) => {
-    const div = document.createElement("div");
-    div.style.zIndex = "1";
-    wrapper?.appendChild(div);
-
-    ReactDOM.render(<>{child}</>, div);
-  });
-
-  renderBackgroundOverlay();
-};
-
-interface Button {
-  component: JSX.Element;
-  position: number;
-  id: string;
-  className?: string;
-}
-
-const addButton = (button: Button) => {
-  const { component, id, position, className } = button;
-
-  // Remove existing button if it exists.
-  const existingButton = document.querySelector(`.plyr_buttons--${id}`);
-  existingButton?.remove();
-
-  const controls = document.querySelector(".plyr__controls");
-  const div = document.createElement("div");
-  div.className = classNames(
-    "plyr__controls__item plyr__control",
-    `plyr_buttons--${id}`,
-    className
-  );
-
-  const controlsChildNodes = controls?.childNodes;
-
-  if (controlsChildNodes) {
-    controls?.insertBefore(
-      div,
-      position < 0
-        ? controlsChildNodes[controlsChildNodes?.length! - 1]
-        : controlsChildNodes[position - 1]
-    );
-
-    ReactDOM.render(component, div);
-  }
 };
 
 Plyr.displayName = "Plyr";
