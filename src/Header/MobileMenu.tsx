@@ -4,7 +4,7 @@ import { BsChevronDown } from "react-icons/bs";
 import { RouteMatch } from "react-router";
 import routes from "../routes";
 import NavButton from "./NavButton";
-import NavDisclosure from "./NavDisclosure";
+import Disclosure from "../components/Disclosure";
 
 const headerRoutes = routes.filter((route) => route.header);
 
@@ -37,7 +37,7 @@ const MobileMenu = ({
               />
             </div>
           ) : (
-            <NavDisclosure
+            <Disclosure
               button={
                 <NavButton
                   redirect={false}
@@ -58,7 +58,7 @@ const MobileMenu = ({
                   className="w-24 overflow-ellipsis"
                 />
               ))}
-            </NavDisclosure>
+            </Disclosure>
           )
         )}
       </div>

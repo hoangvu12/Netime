@@ -1,20 +1,16 @@
 import classNames from "classnames";
-import React, { useState } from "react";
+import React from "react";
 import { BsPlayFill } from "react-icons/bs";
-import useInfiniteScroll from "react-infinite-scroll-hook";
 import { useNavigate, useParams } from "react-router";
 import Button from "../../components/Button";
-import Episode from "../../components/Episode";
+import EpisodeChunk from "../../components/EpisodeChunk";
 import Image from "../../components/Image";
-import Loader from "../../components/Loader";
 import Skeleton from "../../components/Skeleton";
-import { numberWithCommas } from "../../utils";
+import { Episode as EpisodeType } from "../../types";
+import { chunk, numberWithCommas } from "../../utils";
 import useFetchInfo from "./useFetchInfo";
 
 const InfoScreen = () => {
-  const [isLoadingNewEpisodes, setIsLoadingNewEpisodes] = useState(false);
-  const [visibleEpisodes, setVisibleEpisodes] = useState(24);
-
   const { slug } = useParams();
   const navigate = useNavigate();
 
@@ -22,21 +18,7 @@ const InfoScreen = () => {
     navigate("/");
   }
 
-  const handleShowEpisodes = () => {
-    setIsLoadingNewEpisodes(true);
-    setVisibleEpisodes((prev) => prev + 24);
-    setIsLoadingNewEpisodes(false);
-  };
-
   const { data: info, isLoading } = useFetchInfo(slug);
-
-  const hasNextPage = visibleEpisodes < info?.episodes?.length!;
-
-  const [sentryRef] = useInfiniteScroll({
-    loading: isLoadingNewEpisodes,
-    hasNextPage,
-    onLoadMore: handleShowEpisodes,
-  });
 
   const handleClick = (index = 0) => {
     return () => navigate(`/watch/${slug}?episode_index=${index}`);
@@ -135,24 +117,20 @@ const InfoScreen = () => {
           </div>
         </div>
         {!isLoading && (
-          <div className="space-y-4 w-full px-4 md:px-32 py-16 flex flex-col items-cener justify-center">
-            <h1 className="text-white text-2xl font-medium">Tập phim</h1>
-            <div className="space-y-4">
-              {info?.episodes
-                .slice(0, visibleEpisodes)
-                .map((episode, index) => (
-                  <Episode
-                    {...episode}
-                    key={episode.slug}
-                    onClick={handleClick(index)}
-                  />
-                ))}
-            </div>
-            {(isLoadingNewEpisodes || hasNextPage) && (
-              <div ref={sentryRef}>
-                <Loader />
-              </div>
-            )}
+          <div className="space-y-2 w-full px-4 md:px-32 py-16">
+            {chunk<EpisodeType>(info?.episodes!, 18).map((chunk, i) => {
+              const firstEpisode = chunk[0];
+              const lastEpisode = chunk[chunk.length - 1];
+
+              return (
+                <EpisodeChunk
+                  buttonClassName="bg-background-darker"
+                  title={`Tập ${firstEpisode.name} - Tập ${lastEpisode.name}`}
+                  episodes={chunk}
+                  key={i}
+                />
+              );
+            })}
           </div>
         )}
       </div>

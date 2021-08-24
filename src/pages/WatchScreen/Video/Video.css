@@ -22,3 +22,7 @@
   overflow: hidden;
   z-index: 2;
 }
+
+.episode-buttons {
+  width: 100% !important
+}
