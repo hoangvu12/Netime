@@ -53,7 +53,7 @@ Or here is [live example](https://netime.vercel.app)
 - <s>Save user's episodes.</s> ✔️
 - <s>Video player overlay.</s> ✔️
 - <s>Video controls on mobile</s> ✔️
-- "Chunk" episodes into chunks to increase user experience.
+- <s>"Chunk" episodes into chunks.</s> ✔️
 - Meta Tags (Maybe can't with React....)
 - Comments
 
