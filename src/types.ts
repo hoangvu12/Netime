@@ -1,3 +1,5 @@
+import React from "react";
+
 export interface Route {
   name: string;
   path: string;
@@ -7,10 +9,12 @@ export interface Route {
   header: boolean;
   dropdownPath?: (data: any) => string;
   listKey?: (data: any) => string;
+  navigation?: boolean;
+  icon?: React.ComponentType<Icon>;
 }
 
 export interface Icon {
-  size: number;
+  size?: number;
   className?: string;
 }
 

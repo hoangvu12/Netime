@@ -47,7 +47,7 @@ const Search = () => {
           onFocus={handleShowResultPanel(true)}
           onBlur={handleShowResultPanel(false)}
           type="text"
-          placeholder="Tìm kiém"
+          placeholder="Tìm kiếm"
           onChange={handleKeywordChange}
         />
       </div>

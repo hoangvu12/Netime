@@ -1,3 +1,6 @@
+import { AiOutlineHome, AiOutlineSearch } from "react-icons/ai";
+import { BiCoinStack } from "react-icons/bi";
+import { RiNumbersLine } from "react-icons/ri";
 import { GENRES, RANKINGS } from "./constants";
 import { Genre, Ranking, Route } from "./types";
 import lazyLoading from "./utils/lazyLoading";
@@ -15,12 +18,16 @@ const routes: Route[] = [
     component: HomeScreen,
     header: true,
     dropdown: false,
+    navigation: true,
+    icon: AiOutlineHome,
   },
   {
     name: "Thể loại",
     path: "/genres/:slug",
     component: BrowseScreen,
     header: true,
+    navigation: true,
+    icon: BiCoinStack,
     dropdown: true,
     dropdownData: GENRES,
     dropdownPath: (data: Genre) => `/genres/${data.slug}`,
@@ -32,6 +39,8 @@ const routes: Route[] = [
     component: BrowseScreen,
     header: true,
     dropdown: true,
+    icon: RiNumbersLine,
+    navigation: true,
     dropdownData: RANKINGS,
     dropdownPath: (data: Ranking) => `/ranking/${data.slug}`,
     listKey: (data: Ranking) => data.slug,
@@ -52,7 +61,9 @@ const routes: Route[] = [
     name: "Tìm kiếm",
     path: "/search",
     component: SearchScreen,
-    header: true,
+    header: false,
+    navigation: true,
+    icon: AiOutlineSearch,
   },
 ];
 

@@ -30,7 +30,7 @@ const BrowseScreen = () => {
   const list = data?.pages.map((list) => list.data).flat();
 
   return (
-    <div className="w-full px-8 py-20 lg:px-20 lg:py-24">
+    <div className="w-full px-2 py-20 lg:px-20 lg:py-24">
       <div className="w-full p-2">
         <div className="flex items-center justify-between">
           <p className="text-white font-bold text-4xl">{current?.name}</p>

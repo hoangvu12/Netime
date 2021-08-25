@@ -6,7 +6,7 @@ import { DISCORD_NAME, FACEBOOK_URL, GITHUB_URL } from "../constants";
 
 const Footer = () => {
   return (
-    <footer className="footer p-4 w-full flex items-center bg-background-lighter justify-between">
+    <footer className="footer hidden p-4 w-full md:flex items-center bg-background-lighter justify-between">
       <Image src="/logo.png" alt="footer logo" />
 
       <div className="text-white flex items-center space-x-2">

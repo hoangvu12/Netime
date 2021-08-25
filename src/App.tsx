@@ -1,25 +1,16 @@
 import React from "react";
-import { matchRoutes, Route, Routes, useLocation } from "react-router";
+import { Route, Routes } from "react-router";
+import MobileNavigation from "./components/MobileNavigation";
 import Footer from "./Footer";
 import Header from "./Header";
 import routes from "./routes";
 
-const routeObj = routes.map(({ component: Component, path }) => ({
-  caseSensitive: false,
-  element: <Component />,
-  path,
-}));
-
 function App() {
-  const location = useLocation();
-
-  const matchedRoute = matchRoutes(routeObj, location)?.[0];
-
   return (
     <div className="App">
-      <Header matchedRoute={matchedRoute} />
+      <Header />
 
-      <div className="min-h-screen">
+      <div className="pb-16 md:pb-0 min-h-screen">
         <Routes>
           {routes.map(({ path, component: Component }) => (
             <Route key={path} element={<Component />} path={path} />
@@ -28,6 +19,7 @@ function App() {
       </div>
 
       <Footer />
+      <MobileNavigation />
     </div>
   );
 }

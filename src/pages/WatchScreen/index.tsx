@@ -54,12 +54,15 @@ const WatchScreen = () => {
   useEffect(() => {
     const footer = document.querySelector("footer");
     const header = document.querySelector("header");
+    const mobileNav = document.querySelector("mobile-nav");
     footer?.classList.add("hidden");
     header?.classList.add("hidden");
+    mobileNav?.classList.add("hidden");
 
     return () => {
       footer?.classList.remove("hidden");
       header?.classList.remove("hidden");
+      mobileNav?.classList.remove("hidden");
     };
   }, []);
 

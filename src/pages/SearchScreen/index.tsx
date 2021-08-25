@@ -34,7 +34,7 @@ const SearchScreen = () => {
   const list = data?.pages.map((list) => list.data).flat();
 
   return (
-    <div className="px-8 py-20 lg:px-20 lg:py-24 w-full">
+    <div className="px-2 py-20 lg:px-20 lg:py-24 w-full">
       <div className="w-full p-2">
         <div className="flex flex-col space-y-2 md:flex-row md:space-y-0 items-center justify-between">
           <p className="text-white font-medum text-4xl">
@@ -43,7 +43,7 @@ const SearchScreen = () => {
 
           <Input
             type="text"
-            placeholder="Tìm kiém"
+            placeholder="Tìm kiếm"
             onChange={handleKeywordChange}
             className="bg-background-darker px-3 py-2"
             value={keyword || ""}
@@ -64,7 +64,7 @@ const SearchScreen = () => {
         {!list?.length && (
           <div className="my-12 flex items-center justify-center">
             <p className="text-gray-300 text-lg text-center">
-              {!keyword ? "Nhập từ khóa" : "Không có"}
+              {!debouncedKeyword ? "Nhập từ khóa" : "Không có"}
             </p>
           </div>
         )}
