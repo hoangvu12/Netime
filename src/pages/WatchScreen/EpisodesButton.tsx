@@ -32,9 +32,15 @@ const EpisodesButton = (props: EpisodesButtonProps) => {
         <Menu.Items className="no-tap-highlight rounded-md text-white overflow-y-scroll absolute space-y-2 right-0 bottom-full p-6 h-96 w-32rem mt-2 origin-top-right bg-background shadow-lg focus:outline-none">
           <div className="w-full space-y-2">
             {chunk<EpisodeType>(props?.episodes!, 18).map((chunk, i) => {
+              const { activeIndex } = props;
+
               const firstEpisode = chunk[0];
               const lastEpisode = chunk[chunk.length - 1];
-              const activeEpisode = props.episodes[props?.activeIndex!];
+              const activeEpisode = props.episodes[activeIndex!];
+
+              const isOpen = chunk.some(
+                (episode) => episode.name - 1 === activeIndex
+              );
 
               return (
                 <EpisodeChunk
@@ -44,6 +50,7 @@ const EpisodesButton = (props: EpisodesButtonProps) => {
                   key={i}
                   activeName={activeEpisode.name}
                   episodeOnClick={props.onClick}
+                  open={!!isOpen}
                 />
               );
             })}

@@ -7,11 +7,16 @@ interface DisclosureProps {
   className?: string;
   panelClassName?: string;
   buttonClassName?: string;
+  defaultOpen?: boolean;
 }
 
 const Disclosure = (props: PropsWithChildren<DisclosureProps>) => {
   return (
-    <HeadlessDisclosure as="div" className={classNames(props.className)}>
+    <HeadlessDisclosure
+      defaultOpen={props.defaultOpen}
+      as="div"
+      className={classNames(props.className)}
+    >
       {({ open }) => (
         <>
           <HeadlessDisclosure.Button

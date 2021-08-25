@@ -26,6 +26,7 @@ interface EpisodeChunkProps {
   buttonClassName?: string;
   activeName?: number;
   episodeOnClick?: (episode: EpisodeType, index: number) => void;
+  open?: boolean;
 }
 
 const EpisodeChunk: React.FC<EpisodeChunkProps> = (props) => {
@@ -34,6 +35,7 @@ const EpisodeChunk: React.FC<EpisodeChunkProps> = (props) => {
       className={classNames(props.className)}
       buttonClassName={classNames("w-full rounded-md", props.buttonClassName)}
       button={<EpisodeChunkButton title={props.title} />}
+      defaultOpen={props.open}
     >
       {props.episodes.map((episode, index) => (
         <Episode
