@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import React, { useCallback, useEffect, useState } from "react";
 import { BsFillPlayFill, BsPause } from "react-icons/bs";
 import { PlyrInstance } from ".";
@@ -49,7 +50,7 @@ export interface PlyrControlsProps {
 
 const PlyrControls: React.FC<PlyrControlsProps> = ({ player }) => {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
-  const { isMobile } = useDevice();
+  const { isOrientationMobile } = useDevice();
 
   player.on("play", () => {
     setIsPlaying(true);
@@ -65,11 +66,11 @@ const PlyrControls: React.FC<PlyrControlsProps> = ({ player }) => {
     );
 
     if (defaultPlayButton) {
-      if (isMobile) {
+      if (isOrientationMobile) {
         defaultPlayButton.style.display = "none";
       }
     }
-  }, [isMobile]);
+  }, [isOrientationMobile]);
   // @ts-ignore
   const { seekTime } = player.config;
 
@@ -92,7 +93,12 @@ const PlyrControls: React.FC<PlyrControlsProps> = ({ player }) => {
   }, [player]);
 
   return (
-    <div className="md:hidden text-white flex items-center justify-evenly absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-11/12">
+    <div
+      className={classNames(
+        "text-white flex items-center justify-evenly absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-11/12",
+        !isOrientationMobile && "hidden"
+      )}
+    >
       <RewindButton onClick={handleRewind} />
       <PlayButton playing={isPlaying} onClick={handlePlay} />
       <ForwardButton onClick={handleForward} />
