@@ -7,7 +7,7 @@ import SlideCarousel from "./SlideCarousel";
 const sections = [
   {
     title: "Xem gần đây",
-    data: Storage.find<Anime>("recent"),
+    data: Storage.find<Anime>("recent").reverse(),
   },
   {
     title: "Mới cập nhật",
