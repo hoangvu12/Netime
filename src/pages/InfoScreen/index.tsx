@@ -18,6 +18,10 @@ const InfoScreen = () => {
     navigate("/");
   }
 
+  const handleEpisodeClick = (_e: EpisodeType, index: number) => {
+    navigate(`/watch/${slug}?episode_index=${index}`);
+  };
+
   const { data: info, isLoading } = useFetchInfo(slug);
 
   const handleClick = (index = 0) => {
@@ -128,6 +132,7 @@ const InfoScreen = () => {
                   title={`Tập ${firstEpisode.name} - Tập ${lastEpisode.name}`}
                   episodes={chunk}
                   key={i}
+                  episodeOnClick={handleEpisodeClick}
                 />
               );
             })}
