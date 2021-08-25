@@ -1,10 +1,11 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import useInfiniteScroll from "react-infinite-scroll-hook";
 import { useNavigate } from "react-router";
 import AnimeCard from "../../components/AnimeCard";
 import Input from "../../components/Input";
 import Loader from "../../components/Loader";
 import Skeleton from "../../components/Skeleton";
+import useDebounce from "../../hooks/useDebounce";
 import useQueryParams from "../../hooks/useQueryParams";
 import useSearch from "../../hooks/useSearch";
 import AnimeCardSkeleton from "../../skeletons/AnimeCardSkeleton";
@@ -12,17 +13,11 @@ import AnimeCardSkeleton from "../../skeletons/AnimeCardSkeleton";
 const SearchScreen = () => {
   const query = useQueryParams();
   const navigate = useNavigate();
-  const timeout = useRef<NodeJS.Timeout | null>(null);
   const [keyword, setKeyword] = useState(query.get("q"));
+  const debouncedKeyword = useDebounce(keyword || "", 1000);
 
-  const {
-    data,
-    hasNextPage,
-    isLoading,
-    fetchNextPage,
-    isFetchingNextPage,
-    refetch,
-  } = useSearch({ keyword: keyword!, limit: 30, enabled: false });
+  const { data, hasNextPage, isLoading, fetchNextPage, isFetchingNextPage } =
+    useSearch({ keyword: debouncedKeyword, limit: 30, enabled: true });
 
   const [sentryRef] = useInfiniteScroll({
     loading: isFetchingNextPage,
@@ -34,14 +29,6 @@ const SearchScreen = () => {
   const handleKeywordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setKeyword(e.target.value);
     navigate(`/search?q=${e.target.value}`, { replace: true });
-
-    if (timeout.current) {
-      clearTimeout(timeout.current);
-    }
-
-    timeout.current = setTimeout(() => {
-      refetch();
-    }, 1000);
   };
 
   const list = data?.pages.map((list) => list.data).flat();
@@ -76,7 +63,9 @@ const SearchScreen = () => {
 
         {!list?.length && (
           <div className="my-12 flex items-center justify-center">
-            <p className="text-gray-300 text-lg text-center">Không có</p>
+            <p className="text-gray-300 text-lg text-center">
+              {!keyword ? "Nhập từ khóa" : "Không có"}
+            </p>
           </div>
         )}
 
