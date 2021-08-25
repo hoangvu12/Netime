@@ -13,8 +13,13 @@ export const renderOverlayControls = (player: PlyrInstance) => {
 export const renderOverlayBackground = (player: PlyrInstance) => {
   const wrapper = document.querySelector(".plyr--video");
   const div = document.createElement("div");
-  div.className =
-    "absolute left-0 top-0 h-full w-full bg-black bg-opacity-70 transition duration-300";
+
+  const isMobile = typeof window.orientation !== "undefined";
+
+  div.className = classNames(
+    "absolute left-0 top-0 h-full w-full bg-black bg-opacity-70 transition duration-300",
+    !isMobile && "hidden"
+  );
 
   player.on("controlsshown", () => {
     div.style.opacity = "1";
