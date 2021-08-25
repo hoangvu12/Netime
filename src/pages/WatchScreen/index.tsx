@@ -50,22 +50,6 @@ const WatchScreen = () => {
     }
   }, [isPortrait]);
 
-  // Remove footer and header
-  useEffect(() => {
-    const footer = document.querySelector("footer");
-    const header = document.querySelector("header");
-    const mobileNav = document.querySelector("mobile-nav");
-    footer?.classList.add("hidden");
-    header?.classList.add("hidden");
-    mobileNav?.classList.add("hidden");
-
-    return () => {
-      footer?.classList.remove("hidden");
-      header?.classList.remove("hidden");
-      mobileNav?.classList.remove("hidden");
-    };
-  }, []);
-
   const handleSourceChange = () => {
     const { episodes, thumbnail, ...rest } = info!;
 
@@ -126,7 +110,7 @@ const WatchScreen = () => {
   }
 
   return (
-    <div className="absolute bg-background inset-0 w-screen h-screen z-50">
+    <div className="fixed scrollbar-hide bg-background inset-0 w-screen h-screen z-50">
       <div className="relative w-full h-full">
         <Video
           source={{

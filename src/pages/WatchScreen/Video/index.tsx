@@ -76,11 +76,11 @@ const Plyr: React.FC<PropsWithChildren<PlyrProps>> = (props) => {
 
       onReady?.(plyrPlayer, event);
 
-      plyrPlayer.on("enterfullscreen", () => {
-        window.screen.orientation.lock("landscape");
-      });
-
       setContainer(document.querySelector(".plyr--video"));
+    });
+
+    plyrPlayer.on("enterfullscreen", () => {
+      window.screen.orientation.lock("landscape");
     });
   };
 
