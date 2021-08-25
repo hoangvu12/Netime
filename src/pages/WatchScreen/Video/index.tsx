@@ -11,12 +11,9 @@ import React, {
   useRef,
   useState,
 } from "react";
+import Portal from "../../../components/Portal";
+import Overlay from "./Overlay";
 import "./Video.css";
-import {
-  renderOverlayBackground,
-  renderOverlay,
-  renderOverlayControls,
-} from "./methods";
 export { addButtons } from "./methods";
 
 export type PlyrInstance = PlyrJS;
@@ -32,7 +29,7 @@ export type PlyrProps = HTMLProps<HTMLVideoElement> & {
   onSourceChange?: (player: PlyrJS) => void;
 };
 
-export interface HTMLPlyrVideoElement {
+export interface HTMLPlyrVideoElement extends HTMLVideoElement {
   plyr?: PlyrInstance;
 }
 
@@ -49,6 +46,7 @@ const Plyr: React.FC<PropsWithChildren<PlyrProps>> = (props) => {
   } = props;
   const videoSource = source?.sources[0].src!;
   const [player, setPlayer] = useState<PlyrInstance | undefined>();
+  const [container, setContainer] = useState<Element | null>();
 
   const innerRef = useRef<HTMLPlyrVideoElement>();
   const hls = useRef(new Hls());
@@ -82,9 +80,7 @@ const Plyr: React.FC<PropsWithChildren<PlyrProps>> = (props) => {
         window.screen.orientation.lock("landscape");
       });
 
-      renderOverlay(plyrPlayer, children);
-      renderOverlayControls(plyrPlayer);
-      renderOverlayBackground(plyrPlayer);
+      setContainer(document.querySelector(".plyr--video"));
     });
   };
 
@@ -133,11 +129,18 @@ const Plyr: React.FC<PropsWithChildren<PlyrProps>> = (props) => {
   }, [videoSource]);
 
   return (
-    <video
-      ref={innerRef as unknown as MutableRefObject<HTMLVideoElement>}
-      className="plyr-react plyr"
-      {...rest}
-    />
+    <>
+      <video
+        ref={innerRef as unknown as MutableRefObject<HTMLVideoElement>}
+        className="plyr-react plyr"
+        {...rest}
+      />
+      {container && (
+        <Portal element={container}>
+          <Overlay player={player!}>{children}</Overlay>
+        </Portal>
+      )}
+    </>
   );
 };
 
