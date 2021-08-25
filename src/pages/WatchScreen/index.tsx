@@ -19,7 +19,7 @@ const WatchScreen = () => {
   const { slug } = useParams();
   const query = useQueryParams();
   const navigate = useNavigate();
-  const { isDesktop, isMobile } = useDevice();
+  const { isDesktop, isOrientationMobile } = useDevice();
   const { isPortrait } = useOrientation();
 
   const [showPauseScreen, setShowPauseScreen] = useState(false);
@@ -159,7 +159,7 @@ const WatchScreen = () => {
         <div
           className={classNames(
             "absolute inset-0 bg-black bg-opacity-90 px-40 flex flex-col space-y-6 justify-center",
-            !showPauseScreen || isMobile ? "hidden" : "block"
+            !showPauseScreen || isOrientationMobile ? "hidden" : "block"
           )}
           onMouseEnter={() => {
             if (isDesktop && showPauseScreen) {
