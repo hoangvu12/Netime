@@ -104,6 +104,17 @@ const Plyr: React.FC<PropsWithChildren<PlyrProps>> = (props) => {
     createPlayer();
   });
 
+  // Remove footer
+  useEffect(() => {
+    const footer = document.querySelector("footer");
+
+    footer?.classList.add("hidden");
+
+    return () => {
+      footer?.classList.remove("hidden");
+    };
+  }, []);
+
   useEffect(() => {
     onSourceChange?.(player!);
   }, [player, onSourceChange]);
