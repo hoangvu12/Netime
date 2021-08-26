@@ -64,6 +64,7 @@ export interface Anime {
     name: string;
     views: number;
   };
+  episodeIndex?:number
 }
 
 export interface Genre {

@@ -6,8 +6,9 @@ import Button from "../../components/Button";
 import EpisodeChunk from "../../components/EpisodeChunk";
 import Image from "../../components/Image";
 import Skeleton from "../../components/Skeleton";
-import { Episode as EpisodeType } from "../../types";
+import { Anime, Episode as EpisodeType } from "../../types";
 import { chunk, numberWithCommas } from "../../utils";
+import Storage from "../../utils/Storage";
 import useFetchInfo from "./useFetchInfo";
 
 const InfoScreen = () => {
@@ -17,6 +18,8 @@ const InfoScreen = () => {
   if (!slug) {
     navigate("/");
   }
+
+  const storedInfo = Storage.findOne<Anime>("recent", { slug });
 
   const handleEpisodeClick = (_e: EpisodeType, index: number) => {
     navigate(`/watch/${slug}?episode_index=${index}`);
@@ -80,14 +83,26 @@ const InfoScreen = () => {
           </div>
 
           <div className="w-full px-2 flex flex-col flex-1">
-            <Button
-              className="-mt-2 self-center md:self-start bg-background-darker filter blur-none text-primary font-bold text-lg"
-              onClick={handleClick()}
-              startIcon={BsPlayFill}
-              iconSize={20}
-            >
-              Xem ngay
-            </Button>
+            <div className="space-x-2 -mt-2 self-center md:self-start flex items-center font-bold text-lg text-white filter blur-none">
+              <Button
+                className="bg-background-darker hover:bg-opacity-80"
+                onClick={handleClick()}
+                startIcon={BsPlayFill}
+                iconSize={20}
+              >
+                Xem ngay
+              </Button>
+              {!isLoading && storedInfo && (
+                <Button
+                  className="bg-background-darker hover:bg-opacity-80"
+                  onClick={handleClick(storedInfo.episodeIndex)}
+                  startIcon={BsPlayFill}
+                  iconSize={20}
+                >
+                  Xem {info?.episodes[storedInfo.episodeIndex!].full_name}
+                </Button>
+              )}
+            </div>
 
             <div className="mt-6 space-y-2">
               <div className="space-y-1">
