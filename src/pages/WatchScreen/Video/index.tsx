@@ -1,6 +1,5 @@
 /* eslint-disable react/self-closing-comp */
 import Hls from "hls.js";
-import screenfull from "screenfull";
 import PlyrJS, { Options, PlyrEvent as PlyrJSEvent, SourceInfo } from "plyr";
 import "plyr/dist/plyr.css";
 import PropTypes from "prop-types";
@@ -83,9 +82,7 @@ const Plyr: React.FC<PropsWithChildren<PlyrProps>> = (props) => {
     });
 
     plyrPlayer.on("enterfullscreen", () => {
-      if (screenfull.isEnabled) {
-        screenfull.request();
-      }
+     window.screen.orientation.lock("landscape")
     });
   };
 
