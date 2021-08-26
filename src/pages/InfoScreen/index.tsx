@@ -83,7 +83,7 @@ const InfoScreen = () => {
           </div>
 
           <div className="w-full px-2 flex flex-col flex-1">
-            <div className="space-x-2 -mt-2 self-center md:self-start flex items-center font-bold text-lg text-white filter blur-none">
+            <div className="flex-col md:flex-row space-x-2 space-y-2 md:space-y-0 -mt-2 self-center md:self-start flex items-center font-bold text-lg text-white filter blur-none">
               <Button
                 className="bg-background-darker hover:bg-opacity-80"
                 onClick={handleClick()}
