@@ -27,6 +27,7 @@ export type PlyrProps = HTMLProps<HTMLVideoElement> & {
   options?: Options;
   onReady?: (player: PlyrJS, event: PlyrJS.PlyrEvent) => void;
   onSourceChange?: (player: PlyrJS) => void;
+  nextEpisodeClick?: () => void;
 };
 
 export interface HTMLPlyrVideoElement extends HTMLVideoElement {
@@ -42,6 +43,7 @@ const Plyr: React.FC<PropsWithChildren<PlyrProps>> = (props) => {
     onReady,
     onSourceChange,
     children,
+    nextEpisodeClick,
     ...rest
   } = props;
   const videoSource = source?.sources[0].src!;
@@ -137,7 +139,9 @@ const Plyr: React.FC<PropsWithChildren<PlyrProps>> = (props) => {
       />
       {container && (
         <Portal element={container}>
-          <Overlay player={player!}>{children}</Overlay>
+          <Overlay nextEpisodeClick={nextEpisodeClick} player={player!}>
+            {children}
+          </Overlay>
         </Portal>
       )}
     </>

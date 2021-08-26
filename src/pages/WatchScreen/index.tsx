@@ -42,13 +42,9 @@ const WatchScreen = () => {
     setEpisodeIndex(i);
   };
 
-  useEffect(() => {
-    if (isPortrait) {
-      setShowOrientationScreen(true);
-    } else {
-      setShowOrientationScreen(false);
-    }
-  }, [isPortrait]);
+  const handleNextEpisodeClick = () => {
+    setEpisodeIndex((i) => i + 1);
+  };
 
   const handleSourceChange = () => {
     const { episodes, thumbnail, ...rest } = info!;
@@ -101,6 +97,14 @@ const WatchScreen = () => {
     }
   };
 
+  useEffect(() => {
+    if (isPortrait) {
+      setShowOrientationScreen(true);
+    } else {
+      setShowOrientationScreen(false);
+    }
+  }, [isPortrait]);
+
   if (isInfoLoading || isSourceLoading) {
     return (
       <div className="absolute flex items-center justify-center bg-background inset-0 w-screen h-screen z-50">
@@ -123,6 +127,7 @@ const WatchScreen = () => {
           }}
           onReady={handleReady}
           onSourceChange={handleSourceChange}
+          nextEpisodeClick={handleNextEpisodeClick}
         >
           <div className="absolute top-8 left-8">
             <HiArrowNarrowLeft
