@@ -28,6 +28,7 @@ const MobileNavigation = () => {
             <Menu
               as="div"
               className="flex-1 flex justify-center items-center relative"
+              key={path}
             >
               <Menu.Button>
                 <NavigationButton
@@ -37,7 +38,7 @@ const MobileNavigation = () => {
                 />
               </Menu.Button>
 
-              <Menu.Items className="no-tap-highlight rounded-md text-white overflow-y-scroll absolute space-y-10 bottom-full mb-4 w-32 p-4 h-96 bg-background-darker shadow-lg focus:outline-none">
+              <Menu.Items className="no-tap-highlight rounded-lg text-white overflow-y-scroll absolute space-y-10 bottom-full mb-4 w-40 border border-secondary p-4 h-96 bg-background-darker shadow-lg focus:outline-none">
                 {dropdownData?.map((data) => {
                   return (
                     <Link to={dropdownPath?.(data)!} key={data.slug}>
